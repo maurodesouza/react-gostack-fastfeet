@@ -13,7 +13,7 @@ export default function RouteWrapper({
 
   if (!signed && isPrivate) return <Redirect to="/" />;
 
-  if (signed && !isPrivate) return <Redirect to="/dashboard" />;
+  if (signed && !isPrivate) return <Redirect to="/deliveries" />;
 
   return <Route component={Component} {...rest} />;
 }
