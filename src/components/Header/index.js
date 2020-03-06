@@ -1,10 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import logo from '~/assets/images/logo.svg';
 import { Container } from './styles';
 
+import { signOut } from '~/store/modules/auth/actions';
+
 export default function Header() {
+  const dispatch = useDispatch();
+
   return (
     <Container>
       <div>
@@ -18,7 +23,9 @@ export default function Header() {
       </div>
       <aside>
         <strong>Admin Fastfeet</strong>
-        <button type="button">sair do sistema</button>
+        <button type="button" onClick={() => dispatch(signOut())}>
+          sair do sistema
+        </button>
       </aside>
     </Container>
   );
