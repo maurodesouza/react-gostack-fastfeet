@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
+import MenuActions from '~/components/MenuActions';
 import HeaderView from '~/components/HeaderView';
 import HeaderViewInput from '~/components/HeaderView/HeaderViewInput';
 import HeaderViewRegisterButton from '~/components/HeaderView/HeaderViewRegisterButton';
@@ -8,24 +10,24 @@ import TableList from '~/components/TableList';
 import api from '~/services/api';
 import { Container } from './styles';
 
-export default function List() {
+export default function List({ match }) {
   const [deliveries, setDeliveries] = useState([]);
 
+  const loadDeliveries = async () => {
+    const response = await api.get('/deliveries', {
+      params: {
+        q: '',
+      },
+    });
+    const data = response.data.map(delivery => ({
+      ...delivery,
+      idFormatted: `#${`00${delivery.id}`.slice(-2)}`,
+    }));
+
+    setDeliveries(data);
+  };
+
   useEffect(() => {
-    const loadDeliveries = async () => {
-      const response = await api.get('/deliveries', {
-        params: {
-          q: '',
-        },
-      });
-      const data = response.data.map(delivery => ({
-        ...delivery,
-        idFormatted: `#${`00${delivery.id}`.slice(-2)}`,
-      }));
-
-      setDeliveries(data);
-    };
-
     loadDeliveries();
   }, []);
 
@@ -55,10 +57,22 @@ export default function List() {
             <td>{delivery.recipient.city}</td>
             <td>{delivery.recipient.state}</td>
             <td>Status</td>
-            <td>Ações</td>
+            <td>
+              <MenuActions
+                path={match.path}
+                id={delivery.id}
+                load={loadDeliveries}
+              />
+            </td>
           </tr>
         ))}
       </TableList>
     </Container>
   );
 }
+
+List.propTypes = {
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  }).isRequired,
+};
