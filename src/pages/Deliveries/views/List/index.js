@@ -8,7 +8,7 @@ import HeaderViewRegisterButton from '~/components/HeaderView/HeaderViewRegister
 import TableList from '~/components/TableList';
 
 import api from '~/services/api';
-import { Container } from './styles';
+import { Container, Status } from './styles';
 
 export default function List({ match }) {
   const [deliveries, setDeliveries] = useState([]);
@@ -56,7 +56,12 @@ export default function List({ match }) {
             <td>{delivery.deliveryman.name}</td>
             <td>{delivery.recipient.city}</td>
             <td>{delivery.recipient.state}</td>
-            <td>Status</td>
+            <td>
+              <Status status={delivery.status}>
+                <span />
+                {delivery.status}
+              </Status>
+            </td>
             <td>
               <MenuActions
                 path={match.path}
