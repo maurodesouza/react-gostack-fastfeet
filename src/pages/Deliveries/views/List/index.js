@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import MenuActions from '~/components/MenuActions';
+import Pagination from '~/components/Pagination';
 import HeaderView from '~/components/HeaderView';
 import HeaderViewInput from '~/components/HeaderView/HeaderViewInput';
 import HeaderViewRegisterButton from '~/components/HeaderView/HeaderViewRegisterButton';
@@ -12,24 +13,40 @@ import { Container, Status } from './styles';
 
 export default function List({ match }) {
   const [deliveries, setDeliveries] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
-  const loadDeliveries = async () => {
+  const backPage = () => setPage(page - 1);
+
+  const nextPage = () => setPage(page + 1);
+
+  const loadDeliveries = useCallback(async () => {
+    window.scroll({
+      behavior: 'smooth',
+      top: 0,
+    });
+
     const response = await api.get('/deliveries', {
       params: {
         q: '',
+        page,
       },
     });
+
     const data = response.data.map(delivery => ({
       ...delivery,
       idFormatted: `#${`00${delivery.id}`.slice(-2)}`,
     }));
 
+    const pageTotal = Math.round(response.headers['x-total-count'] / 10);
+
     setDeliveries(data);
-  };
+    setTotalPages(pageTotal);
+  }, [page]);
 
   useEffect(() => {
     loadDeliveries();
-  }, []);
+  }, [loadDeliveries]);
 
   return (
     <Container teste={deliveries}>
@@ -72,6 +89,12 @@ export default function List({ match }) {
           </tr>
         ))}
       </TableList>
+      <Pagination
+        currentPage={page}
+        totalPages={totalPages}
+        backPage={backPage}
+        nextPage={nextPage}
+      />
     </Container>
   );
 }
