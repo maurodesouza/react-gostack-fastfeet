@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import MenuActions from '~/components/MenuActions';
 import Pagination from '~/components/Pagination';
 import HeaderView from '~/components/HeaderView';
-import HeaderViewInput from '~/components/HeaderView/HeaderViewInput';
+import HeaderViewForm from '~/components/HeaderView/HeaderViewForm';
 import HeaderViewRegisterButton from '~/components/HeaderView/HeaderViewRegisterButton';
 import TableList from '~/components/TableList';
 
@@ -13,8 +13,14 @@ import { Container, Status } from './styles';
 
 export default function List({ match }) {
   const [deliveries, setDeliveries] = useState([]);
+  const [q, setQ] = useState('');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+
+  const onSearch = value => {
+    setQ(value);
+    setPage(1);
+  };
 
   const backPage = () => setPage(page - 1);
 
@@ -28,7 +34,7 @@ export default function List({ match }) {
 
     const response = await api.get('/deliveries', {
       params: {
-        q: '',
+        q,
         page,
       },
     });
@@ -42,7 +48,7 @@ export default function List({ match }) {
 
     setDeliveries(data);
     setTotalPages(pageTotal);
-  }, [page]);
+  }, [page, q]);
 
   useEffect(() => {
     loadDeliveries();
@@ -51,7 +57,10 @@ export default function List({ match }) {
   return (
     <Container teste={deliveries}>
       <HeaderView title="Gerenciando encomendas">
-        <HeaderViewInput placeholder="Buscar por encomendas" />
+        <HeaderViewForm
+          placeholder="Buscar por encomendas"
+          onSearch={onSearch}
+        />
         <HeaderViewRegisterButton />
       </HeaderView>
 
