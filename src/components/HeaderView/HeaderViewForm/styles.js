@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Label = styled.label`
+export const Form = styled.form`
   background: #fff;
   width: 235px;
   border: 1px solid #ddd;
@@ -8,6 +8,18 @@ export const Label = styled.label`
   display: flex;
   align-items: center;
   padding: 10px 15px;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
 
   svg {
     margin-right: 8px;
