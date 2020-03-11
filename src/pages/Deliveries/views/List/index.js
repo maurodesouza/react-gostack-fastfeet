@@ -47,7 +47,7 @@ export default function List({ match }) {
       idFormatted: `#${`00${delivery.id}`.slice(-2)}`,
     }));
 
-    const pageTotal = Math.round(response.headers['x-total-count'] / 10);
+    const pageTotal = Math.ceil(response.headers['x-total-count'] / 10);
 
     setDeliveries(data);
     setTotalPages(pageTotal);
