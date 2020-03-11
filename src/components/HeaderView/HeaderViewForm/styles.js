@@ -1,6 +1,11 @@
 import styled from 'styled-components';
+import { Form as unForm } from '@unform/web';
 
-export const Form = styled.form`
+export const Form = styled(unForm)`
+  display: flex;
+`;
+
+export const SearchWrapper = styled.span`
   background: #fff;
   width: 235px;
   border: 1px solid #ddd;
@@ -8,6 +13,18 @@ export const Form = styled.form`
   display: flex;
   align-items: center;
   padding: 10px 15px;
+  margin-right: 20px;
+
+  input {
+    background: transparent;
+    font-size: 14px;
+    border: 0;
+    color: #999;
+
+    &::placeholder {
+      color: #999;
+    }
+  }
 
   button {
     display: flex;
@@ -23,16 +40,5 @@ export const Form = styled.form`
 
   svg {
     margin-right: 8px;
-  }
-
-  input {
-    background: transparent;
-    font-size: 14px;
-    border: 0;
-    color: #999;
-
-    &::placeholder {
-      color: #999;
-    }
   }
 `;
