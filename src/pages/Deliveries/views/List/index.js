@@ -14,11 +14,13 @@ import { Container, Status } from './styles';
 export default function List({ match }) {
   const [deliveries, setDeliveries] = useState([]);
   const [q, setQ] = useState('');
+  const [state, setState] = useState('');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
-  const onSearch = value => {
-    setQ(value);
+  const onSearch = (search, status) => {
+    setQ(search);
+    setState(status);
     setPage(1);
   };
 
@@ -36,6 +38,7 @@ export default function List({ match }) {
       params: {
         q,
         page,
+        state,
       },
     });
 
@@ -48,7 +51,7 @@ export default function List({ match }) {
 
     setDeliveries(data);
     setTotalPages(pageTotal);
-  }, [page, q]);
+  }, [page, q, state]);
 
   useEffect(() => {
     loadDeliveries();
