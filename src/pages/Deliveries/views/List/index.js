@@ -9,7 +9,7 @@ import HeaderViewRegisterButton from '~/components/HeaderView/HeaderViewRegister
 import TableList from '~/components/TableList';
 
 import api from '~/services/api';
-import { Container, Status } from './styles';
+import { Container, Status, Tr } from './styles';
 
 export default function List({ match }) {
   const [deliveries, setDeliveries] = useState([]);
@@ -79,7 +79,7 @@ export default function List({ match }) {
         ]}
       >
         {deliveries.map(delivery => (
-          <tr key={delivery.id}>
+          <Tr key={delivery.id} haveProblem={delivery.have_problem}>
             <td>{delivery.idFormatted}</td>
             <td>{delivery.recipient.name}</td>
             <td>{delivery.deliveryman.name}</td>
@@ -98,7 +98,7 @@ export default function List({ match }) {
                 load={loadDeliveries}
               />
             </td>
-          </tr>
+          </Tr>
         ))}
       </TableList>
       <Pagination

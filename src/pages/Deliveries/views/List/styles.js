@@ -42,3 +42,9 @@ export const Status = styled.span`
     margin-right: 5px;
   }
 `;
+
+export const Tr = styled.tr`
+  td {
+    color: ${({ haveProblem }) => (haveProblem ? '#de3b3b !important' : '')};
+  }
+`;
