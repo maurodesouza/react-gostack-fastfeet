@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 
 import MenuActions from '~/components/MenuActions';
@@ -7,15 +8,21 @@ import HeaderView from '~/components/HeaderView';
 import HeaderViewForm from '~/components/HeaderView/HeaderViewForm';
 import HeaderViewRegisterButton from '~/components/HeaderView/HeaderViewRegisterButton';
 import TableList from '~/components/TableList';
+import Modal from './modalContent';
 
 import api from '~/services/api';
+import history from '~/services/history';
+
 import { Container, Status, Tr } from './styles';
 
 export default function List({ match }) {
   const [deliveries, setDeliveries] = useState([]);
+  const [modalDelivery, setModalDelivery] = useState(null);
+
   const [q, setQ] = useState('');
   const [state, setState] = useState('');
   const [page, setPage] = useState(1);
+
   const [totalPages, setTotalPages] = useState(0);
 
   const onSearch = (search, status) => {
@@ -56,6 +63,35 @@ export default function List({ match }) {
   useEffect(() => {
     loadDeliveries();
   }, [loadDeliveries]);
+
+  useEffect(() => {
+    const { url, params, path } = match;
+
+    if (path === '/deliveries') return;
+
+    const loadDelivery = async () => {
+      try {
+        const { data } = await api.get(url);
+
+        setModalDelivery(data);
+      } catch (err) {
+        const { error } = err.response.data;
+
+        history.push('/deliveries');
+        toast.error(error);
+      }
+    };
+
+    if (Number.isInteger(Number(params.id))) {
+      loadDelivery();
+      return;
+    }
+
+    history.push('/deliveries');
+    toast.error('Passe um ID valido para visualizar a encomenda !', {
+      autoClose: 3500,
+    });
+  }, [match]);
 
   return (
     <Container teste={deliveries}>
@@ -101,18 +137,30 @@ export default function List({ match }) {
           </Tr>
         ))}
       </TableList>
+
       <Pagination
         currentPage={page}
         totalPages={totalPages}
         backPage={backPage}
         nextPage={nextPage}
       />
+
+      {modalDelivery && (
+        <Modal
+          onClose={() => [history.push('/deliveries'), setModalDelivery(null)]}
+          delivery={modalDelivery}
+        />
+      )}
     </Container>
   );
 }
 
 List.propTypes = {
   match: PropTypes.shape({
-    path: PropTypes.string.isRequired,
+    path: PropTypes.string,
+    url: PropTypes.string,
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
   }).isRequired,
 };
