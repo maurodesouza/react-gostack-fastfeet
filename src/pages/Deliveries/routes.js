@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import List from './views/List';
 import Form from './views/Form';
-import Modal from './views/Modal';
 
 export default function Routes({ path }) {
   return (
@@ -12,7 +11,7 @@ export default function Routes({ path }) {
       <Route path={path} exact component={List} />
       <Route path={`${path}/add`} component={Form} />
       <Route path={`${path}/edit/:id`} component={Form} />
-      <Route path={`${path}/:id`} component={Modal} />
+      <Route path={`${path}/:id`} component={List} />
     </Switch>
   );
 }
