@@ -42,13 +42,16 @@ export default function MenuActions({ path, id, load }) {
         <span />
         <span />
       </Icon>
+
       <ActionsList visible={visible}>
-        <Link to={`${path}/${id}`}>
+        <Link to={`${path}/${id}`} onClick={() => setVisible(false)}>
           <MdRemoveRedEye color="#8e5be8" /> Visualizar
         </Link>
+
         <Link to={`${path}/edit/${id}`}>
           <MdCreate color="#4d85ee" /> Editar
         </Link>
+
         <DeleteButton onClick={onDelete} confirm={confirm}>
           {confirm ? (
             <>
