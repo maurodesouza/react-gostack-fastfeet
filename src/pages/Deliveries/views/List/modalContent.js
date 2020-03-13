@@ -1,4 +1,5 @@
 import React from 'react';
+import { format, parseISO } from 'date-fns';
 import PropTypes from 'prop-types';
 
 import Modal from '~/components/Modal';
@@ -25,13 +26,13 @@ export default function ModalContent({ delivery, ...rest }) {
         {(delivery.start_date && (
           <p>
             <strong>Retirada: </strong>
-            {delivery.start_date}
+            {format(parseISO(delivery.start_date), 'dd/MM/yyyy')}
           </p>
         )) || (
           <>
             <p>
               <strong>Cadastrada: </strong>
-              {delivery.createdAt}
+              {format(parseISO(delivery.createdAt), 'dd/MM/yyyy')}
             </p>
             <p>Aguardando para ser retirada !</p>
           </>
@@ -40,13 +41,15 @@ export default function ModalContent({ delivery, ...rest }) {
         {(delivery.canceled_at && (
           <p>
             <strong>Cancelada: </strong>
-            {delivery.canceled_at}
+            {format(parseISO(delivery.canceled_at), 'dd/MM/yyyy')}
           </p>
         )) ||
           (delivery.start_date && (
             <p>
               <strong>Entrega: </strong>
-              {delivery.end_date || 'ainda não foi entregue !'}
+              {delivery.end_date
+                ? format(parseISO(delivery.end_date), 'dd/MM/yyyy')
+                : 'ainda não foi entregue !'}
             </p>
           ))}
       </div>
