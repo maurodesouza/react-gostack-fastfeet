@@ -12,6 +12,7 @@ import Modal from './modalContent';
 
 import api from '~/services/api';
 import history from '~/services/history';
+import ufConversor from '~/util/ufConversor';
 
 import { Container, Status, Tr } from './styles';
 
@@ -120,7 +121,7 @@ export default function List({ match }) {
             <td>{delivery.recipient.name}</td>
             <td>{delivery.deliveryman.name}</td>
             <td>{delivery.recipient.city}</td>
-            <td>{delivery.recipient.state}</td>
+            <td>{ufConversor(delivery.recipient.state)}</td>
             <td>
               <Status status={delivery.status}>
                 <span />
