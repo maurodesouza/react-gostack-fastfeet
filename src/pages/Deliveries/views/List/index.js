@@ -14,7 +14,7 @@ import api from '~/services/api';
 import history from '~/services/history';
 import ufConversor from '~/util/ufConversor';
 
-import { Container, Status, Tr } from './styles';
+import { Container, Status, Tr, DeliverymanWrapper, NoImage } from './styles';
 
 export default function List({ match }) {
   const [deliveries, setDeliveries] = useState([]);
@@ -38,6 +38,12 @@ export default function List({ match }) {
 
   const onlyTwoNames = fullName =>
     fullName.replace(/([a-zà-ú]+\s([a-zà-ú]{2,3}\s)?[a-zà-ú]+)(.*)/i, '$1');
+
+  const firtsLetters = fullName =>
+    fullName.replace(
+      /([a-zà-ú])([a-zà-ú]*\s)([a-zà-ú]{2,3}\s)?([a-zà-ú])?(.+)?/i,
+      '$1$4'
+    );
 
   const loadDeliveries = useCallback(async () => {
     window.scroll({
@@ -122,15 +128,31 @@ export default function List({ match }) {
           <Tr key={delivery.id} haveProblem={delivery.have_problem}>
             <td>{delivery.idFormatted}</td>
             <td>{onlyTwoNames(delivery.recipient.name)}</td>
-            <td>{onlyTwoNames(delivery.deliveryman.name)}</td>
+
+            <td>
+              <DeliverymanWrapper>
+                {(delivery.deliveryman.avatar && (
+                  <img
+                    src={delivery.deliveryman.avatar.url}
+                    alt={delivery.deliveryman.name}
+                  />
+                )) || (
+                  <NoImage>{firtsLetters(delivery.deliveryman.name)}</NoImage>
+                )}
+                <p>{onlyTwoNames(delivery.deliveryman.name)}</p>
+              </DeliverymanWrapper>
+            </td>
+
             <td>{delivery.recipient.city}</td>
             <td>{ufConversor(delivery.recipient.state)}</td>
+
             <td>
               <Status status={delivery.status}>
                 <span />
                 {delivery.status}
               </Status>
             </td>
+
             <td>
               <MenuActions
                 path={match.path}

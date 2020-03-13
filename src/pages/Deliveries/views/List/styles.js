@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const stateColor = {
   pendente: {
@@ -18,6 +18,33 @@ const stateColor = {
     color: '#de3b3b',
   },
 };
+
+const noImageBackground = [
+  {
+    background: '#f4effc',
+    color: '#a28fd0',
+  },
+  {
+    background: '#fcf4ee',
+    color: '#cb946c',
+  },
+  {
+    background: '#ebfbfa',
+    color: '#83cec9',
+  },
+  {
+    background: '#ffeef1',
+    color: '#cc7584',
+  },
+  {
+    background: '#f4f9ef',
+    color: '#a8d080',
+  },
+  {
+    background: '#fcfcef',
+    color: '#cccc8b',
+  },
+];
 
 export const Container = styled.div`
   margin: 30px auto 0;
@@ -47,4 +74,37 @@ export const Tr = styled.tr`
   td {
     color: ${({ haveProblem }) => (haveProblem ? '#de3b3b !important' : '')};
   }
+`;
+
+export const DeliverymanWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+`;
+
+export const NoImage = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 10px;
+  font-size: 16px;
+
+  ${() => {
+    const randomNumber = Math.floor(Math.random() * 5);
+
+    return css`
+      background: ${noImageBackground[randomNumber].background};
+      color: ${noImageBackground[randomNumber].color};
+    `;
+  }}
 `;
