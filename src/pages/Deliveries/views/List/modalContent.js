@@ -17,7 +17,8 @@ export default function ModalContent({ delivery, ...rest }) {
       </p>
       {delivery.have_problem && (
         <p>
-          Essa encomenda possui {delivery.delivery_problems.length} problemas
+          Essa encomenda possui {delivery.delivery_problems.length}{' '}
+          {delivery.delivery_problems.length > 1 ? 'problemas' : 'problema'}
         </p>
       )}
 
