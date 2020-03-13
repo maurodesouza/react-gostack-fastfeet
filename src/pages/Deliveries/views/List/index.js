@@ -36,6 +36,9 @@ export default function List({ match }) {
 
   const nextPage = () => setPage(page + 1);
 
+  const onlyTwoNames = fullName =>
+    fullName.replace(/([a-zà-ú]+\s([a-zà-ú]{2,3}\s)?[a-zà-ú]+)(.*)/i, '$1');
+
   const loadDeliveries = useCallback(async () => {
     window.scroll({
       behavior: 'smooth',
@@ -118,8 +121,8 @@ export default function List({ match }) {
         {deliveries.map(delivery => (
           <Tr key={delivery.id} haveProblem={delivery.have_problem}>
             <td>{delivery.idFormatted}</td>
-            <td>{delivery.recipient.name}</td>
-            <td>{delivery.deliveryman.name}</td>
+            <td>{onlyTwoNames(delivery.recipient.name)}</td>
+            <td>{onlyTwoNames(delivery.deliveryman.name)}</td>
             <td>{delivery.recipient.city}</td>
             <td>{ufConversor(delivery.recipient.state)}</td>
             <td>
