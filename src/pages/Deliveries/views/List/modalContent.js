@@ -54,6 +54,7 @@ export default function ModalContent({ delivery, ...rest }) {
       {delivery.end_date && (
         <>
           <h2>Assinatura do destinatário</h2>
+          <img src={delivery.signature.url} alt={delivery.signature.name} />
         </>
       )}
     </Modal>

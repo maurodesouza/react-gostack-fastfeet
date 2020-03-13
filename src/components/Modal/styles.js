@@ -44,4 +44,9 @@ export const Wrapper = styled.div`
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
   }
+
+  img {
+    display: block;
+    margin: 20px auto 0;
+  }
 `;
