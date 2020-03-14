@@ -110,7 +110,7 @@ export default function List({ match }) {
           placeholder="Buscar por encomendas"
           onSearch={onSearch}
         />
-        <HeaderViewRegisterButton />
+        <HeaderViewRegisterButton path={match.path} />
       </HeaderView>
 
       <TableList

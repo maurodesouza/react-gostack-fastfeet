@@ -11,6 +11,11 @@ export const Button = styled.button`
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 1px;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
 
   svg {
     margin-right: 8px;
