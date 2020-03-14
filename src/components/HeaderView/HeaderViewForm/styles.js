@@ -42,3 +42,7 @@ export const SearchWrapper = styled.span`
     margin-right: 8px;
   }
 `;
+
+export const SelectWrapper = styled.div`
+  width: 235px;
+`;

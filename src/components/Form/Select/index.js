@@ -3,7 +3,10 @@ import ReactSelect from 'react-select';
 import { useField } from '@unform/core';
 import PropTypes from 'prop-types';
 
-export default function Select({ name, ...rest }) {
+import { Container, defaultStyles } from './styles';
+import { Label } from '../Label';
+
+export default function Select({ name, label, ...rest }) {
   const selectRef = useRef(null);
 
   const { fieldName, registerField, defaultValue } = useField(name);
@@ -29,16 +32,24 @@ export default function Select({ name, ...rest }) {
   }, [fieldName, registerField, rest.isMulti]);
 
   return (
-    <ReactSelect
-      autoFocus={false}
-      defaultValue={defaultValue}
-      ref={selectRef}
-      classNamePrefix="react-select"
-      {...rest}
-    />
+    <Container>
+      {label && <Label htmlFor={fieldName}>{label}</Label>}
+      <ReactSelect
+        defaultValue={defaultValue}
+        ref={selectRef}
+        classNamePrefix="react-select"
+        styles={defaultStyles}
+        {...rest}
+      />
+    </Container>
   );
 }
 
 Select.propTypes = {
   name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+};
+
+Select.defaultProps = {
+  label: '',
 };

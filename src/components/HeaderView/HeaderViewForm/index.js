@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { MdSearch } from 'react-icons/md';
 
 import Select from '~/components/Form/Select';
-import { options, customStyles } from './selectContent';
+import { options } from './selectContent';
 
-import { Form, SearchWrapper } from './styles';
+import { Form, SearchWrapper, SelectWrapper } from './styles';
 import Input from '~/components/Form/Input';
 
 export default function HeaderForm({ onSearch, ...rest }) {
@@ -26,15 +26,16 @@ export default function HeaderForm({ onSearch, ...rest }) {
           </button>
           <Input name="search" {...rest} />
         </SearchWrapper>
-        <Select
-          styles={customStyles}
-          options={options}
-          defaultValue={options[0]}
-          placeholder="Selecione o status"
-          name="status"
-          isSearchable={false}
-          onChange={({ value }) => handleSubmit({ status: value })}
-        />
+        <SelectWrapper>
+          <Select
+            options={options}
+            defaultValue={options[0]}
+            placeholder="Selecione o status"
+            name="status"
+            isSearchable={false}
+            onChange={({ value }) => handleSubmit({ status: value })}
+          />
+        </SelectWrapper>
       </Form>
     </>
   );
