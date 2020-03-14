@@ -8,7 +8,7 @@ import { options } from './selectContent';
 import { Form, SearchWrapper, SelectWrapper } from './styles';
 import Input from '~/components/Form/Input';
 
-export default function HeaderForm({ onSearch, ...rest }) {
+export default function HeaderForm({ onSearch, searchOnly, ...rest }) {
   const formRef = useRef(null);
 
   const handleSubmit = ({ search = '', status }) => {
@@ -26,16 +26,19 @@ export default function HeaderForm({ onSearch, ...rest }) {
           </button>
           <Input name="search" {...rest} />
         </SearchWrapper>
-        <SelectWrapper>
-          <Select
-            options={options}
-            defaultValue={options[0]}
-            placeholder="Selecione o status"
-            name="status"
-            isSearchable={false}
-            onChange={({ value }) => handleSubmit({ status: value })}
-          />
-        </SelectWrapper>
+
+        {!searchOnly && (
+          <SelectWrapper>
+            <Select
+              options={options}
+              defaultValue={options[0]}
+              placeholder="Selecione o status"
+              name="status"
+              isSearchable={false}
+              onChange={({ value }) => handleSubmit({ status: value })}
+            />
+          </SelectWrapper>
+        )}
       </Form>
     </>
   );
@@ -43,4 +46,9 @@ export default function HeaderForm({ onSearch, ...rest }) {
 
 HeaderForm.propTypes = {
   onSearch: PropTypes.func.isRequired,
+  searchOnly: PropTypes.bool,
+};
+
+HeaderForm.defaultProps = {
+  searchOnly: false,
 };
