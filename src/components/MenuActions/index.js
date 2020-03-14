@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import api from '~/services/api';
 import { Container, Icon, ActionsList, DeleteButton } from './styles';
 
-export default function MenuActions({ path, id, load }) {
+export default function MenuActions({ path, id, load, noView }) {
   const [visible, setVisible] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [timeOut, setTimeOut] = useState(false);
@@ -44,9 +44,11 @@ export default function MenuActions({ path, id, load }) {
       </Icon>
 
       <ActionsList visible={visible}>
-        <Link to={`${path}/${id}`} onClick={() => setVisible(false)}>
-          <MdRemoveRedEye color="#8e5be8" /> Visualizar
-        </Link>
+        {!noView && (
+          <Link to={`${path}/${id}`} onClick={() => setVisible(false)}>
+            <MdRemoveRedEye color="#8e5be8" /> Visualizar
+          </Link>
+        )}
 
         <Link to={`${path}/edit/${id}`}>
           <MdCreate color="#4d85ee" /> Editar
@@ -72,4 +74,9 @@ MenuActions.propTypes = {
   path: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   load: PropTypes.func.isRequired,
+  noView: PropTypes.bool,
+};
+
+MenuActions.defaultProps = {
+  noView: false,
 };
