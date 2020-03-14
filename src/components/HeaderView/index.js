@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import { Container } from './styles';
 
-export default function HeaderView({ title, children }) {
+export default function HeaderView({ title, isToForm, children }) {
   return (
-    <Container>
+    <Container isToForm={isToForm}>
       <h1>{title}</h1>
       <div>{children}</div>
     </Container>
@@ -14,5 +14,10 @@ export default function HeaderView({ title, children }) {
 
 HeaderView.propTypes = {
   title: PropTypes.string.isRequired,
+  isToForm: PropTypes.bool,
   children: PropTypes.instanceOf(Array).isRequired,
+};
+
+HeaderView.defaultProps = {
+  isToForm: false,
 };

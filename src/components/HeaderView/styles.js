@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -17,4 +17,20 @@ export const Container = styled.div`
     align-items: center;
     justify-content: space-between;
   }
+
+  ${({ isToForm }) =>
+    isToForm &&
+    css`
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      h1 {
+        margin: 0;
+      }
+
+      div {
+        align-items: stretch;
+      }
+    `}
 `;
