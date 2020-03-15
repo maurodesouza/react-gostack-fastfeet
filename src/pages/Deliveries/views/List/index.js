@@ -2,19 +2,18 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 
-import MenuActions from '~/components/MenuActions';
 import Pagination from '~/components/Pagination';
 import HeaderView from '~/components/HeaderView';
 import HeaderViewForm from '~/components/HeaderView/HeaderViewForm';
 import HeaderViewRegisterButton from '~/components/HeaderView/HeaderViewRegisterButton';
-import TableList from '~/components/TableList';
+
 import Modal from './modalContent';
+import TableList from './tableListContent';
 
 import api from '~/services/api';
 import history from '~/services/history';
-import ufConversor from '~/util/ufConversor';
 
-import { Container, Status, Tr, DeliverymanWrapper, NoImage } from './styles';
+import { Container } from './styles';
 
 export default function List({ match }) {
   const [deliveries, setDeliveries] = useState([]);
@@ -35,15 +34,6 @@ export default function List({ match }) {
   const backPage = () => setPage(page - 1);
 
   const nextPage = () => setPage(page + 1);
-
-  const onlyTwoNames = fullName =>
-    fullName.replace(/([a-zà-ú]+\s([a-zà-ú]{2,3}\s)?[a-zà-ú]+)(.*)/i, '$1');
-
-  const firtsLetters = fullName =>
-    fullName.replace(
-      /([a-zà-ú])([a-zà-ú]*\s)([a-zà-ú]{2,3}\s)?([a-zà-ú])?(.+)?/i,
-      '$1$4'
-    );
 
   const loadDeliveries = useCallback(async () => {
     window.scroll({
@@ -114,68 +104,10 @@ export default function List({ match }) {
       </HeaderView>
 
       <TableList
-        thead={[
-          'ID',
-          'Destinatário',
-          'Entregador',
-          'Cidade',
-          'Estado',
-          'Status',
-          'Ações',
-        ]}
-      >
-        {deliveries.map(delivery => {
-          const { deliveryman, recipient } = delivery;
-
-          return (
-            <Tr key={delivery.id} haveProblem={delivery.have_problem}>
-              <td>{delivery.idFormatted}</td>
-
-              <td>
-                {recipient
-                  ? onlyTwoNames(delivery.recipient.name)
-                  : 'Foi Excluido !'}
-              </td>
-
-              <td>
-                {(deliveryman && (
-                  <DeliverymanWrapper>
-                    {(deliveryman.avatar && (
-                      <img
-                        src={deliveryman.avatar.url}
-                        alt={deliveryman.name}
-                      />
-                    )) || <NoImage>{firtsLetters(deliveryman.name)}</NoImage>}
-                    <p>{onlyTwoNames(deliveryman.name)}</p>
-                  </DeliverymanWrapper>
-                )) ||
-                  'Foi Excluido !'}
-              </td>
-
-              <td>{recipient ? recipient.city : ''}</td>
-              <td>{recipient ? ufConversor(recipient.state) : ''}</td>
-
-              <td>
-                <Status status={delivery.status}>
-                  <span />
-                  {delivery.status}
-                </Status>
-              </td>
-
-              <td>
-                <MenuActions
-                  options={{
-                    deleteSuccessMessage: 'Encomenda deletada com sucesso !',
-                  }}
-                  path={match.path}
-                  id={delivery.id}
-                  load={loadDeliveries}
-                />
-              </td>
-            </Tr>
-          );
-        })}
-      </TableList>
+        path={match.path}
+        load={loadDeliveries}
+        deliveries={deliveries}
+      />
 
       <Pagination
         currentPage={page}
