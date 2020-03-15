@@ -8,8 +8,7 @@ export const Container = styled.div`
     font-size: 24px;
     font-weight: bold;
     color: #444;
-    margin-bottom: 35px;
-    margin-top: 5px;
+    margin: ${({ existChildren }) => (existChildren ? '5px 0 35px' : '0')};
   }
 
   div {
