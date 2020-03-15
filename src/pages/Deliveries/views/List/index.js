@@ -164,6 +164,9 @@ export default function List({ match }) {
 
               <td>
                 <MenuActions
+                  options={{
+                    deleteSuccessMessage: 'Encomenda deletada com sucesso !',
+                  }}
                   path={match.path}
                   id={delivery.id}
                   load={loadDeliveries}

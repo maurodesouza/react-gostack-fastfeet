@@ -84,6 +84,9 @@ export default function List({ match }) {
             <td>
               <MenuActions
                 noView
+                options={{
+                  deleteSuccessMessage: 'Destinatário deletado com sucesso !',
+                }}
                 path={match.path}
                 id={recipient.id}
                 load={loadRecipients}
