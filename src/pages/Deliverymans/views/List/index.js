@@ -9,6 +9,7 @@ import HeaderViewRegisterButton from '~/components/HeaderView/HeaderViewRegister
 import TableList from '~/components/TableList';
 
 import api from '~/services/api';
+import { firtsLetters } from '~/util/regex';
 
 import { Container, NoImage, Img } from './styles';
 
@@ -28,12 +29,6 @@ export default function List({ match }) {
   const backPage = () => setPage(page - 1);
 
   const nextPage = () => setPage(page + 1);
-
-  const firtsLetters = fullName =>
-    fullName.replace(
-      /([a-zà-ú])([a-zà-ú]*\s)([a-zà-ú]{2,3}\s)?([a-zà-ú])?(.+)?/i,
-      '$1$4'
-    );
 
   const loadDeliverymans = useCallback(async () => {
     window.scroll({

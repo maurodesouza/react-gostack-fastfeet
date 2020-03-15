@@ -11,6 +11,7 @@ import Modal from '~/components/Modal';
 
 import api from '~/services/api';
 import history from '~/services/history';
+import { yet100Digits } from '~/util/regex';
 
 import { Container } from './styles';
 
@@ -25,8 +26,6 @@ export default function List({ match }) {
   const backPage = () => setPage(page - 1);
 
   const nextPage = () => setPage(page + 1);
-
-  const yet100Digits = text => text.replace(/(.{120})(.+)/, '$1...');
 
   const loadProblems = useCallback(async () => {
     window.scroll({
