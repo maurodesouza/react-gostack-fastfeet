@@ -36,7 +36,12 @@ export default function MenuActions({
         );
       } catch (err) {
         const { error } = err.response.data;
-        toast.error(error);
+
+        const autoClose = error.length > 50 ? 5000 : '';
+
+        toast.error(error, {
+          autoClose,
+        });
       }
 
       return;
