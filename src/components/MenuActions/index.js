@@ -8,7 +8,14 @@ import PropTypes from 'prop-types';
 import api from '~/services/api';
 import { Container, Icon, ActionsList, DeleteButton } from './styles';
 
-export default function MenuActions({ path, id, load, noView }) {
+export default function MenuActions({
+  path,
+  id,
+  load,
+  noView,
+  noEditable,
+  options,
+}) {
   const [visible, setVisible] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [timeOut, setTimeOut] = useState(false);
@@ -20,9 +27,13 @@ export default function MenuActions({ path, id, load, noView }) {
       setConfirm(false);
 
       try {
-        await api.delete(`${path}/${id}`);
+        await api.delete(
+          `${path}/${options.deleteId || id}${options.deleteUrlSuffix || ''}`
+        );
         load();
-        toast.success('Item deletado com sucesso !');
+        toast.success(
+          options.deleteSuccessMessage || 'Item deletado com successo !'
+        );
       } catch (err) {
         const { error } = err.response.data;
         toast.error(error);
@@ -50,9 +61,11 @@ export default function MenuActions({ path, id, load, noView }) {
           </Link>
         )}
 
-        <Link to={`${path}/edit/${id}`}>
-          <MdCreate color="#4d85ee" /> Editar
-        </Link>
+        {!noEditable && (
+          <Link to={`${path}/edit/${id}`}>
+            <MdCreate color="#4d85ee" /> Editar
+          </Link>
+        )}
 
         <DeleteButton onClick={onDelete} confirm={confirm}>
           {confirm ? (
@@ -61,7 +74,8 @@ export default function MenuActions({ path, id, load, noView }) {
             </>
           ) : (
             <>
-              <MdDeleteForever color="#de3b3b" /> Deletar
+              <MdDeleteForever color="#de3b3b" />{' '}
+              {options.deleteLabel || 'Deletar'}
             </>
           )}
         </DeleteButton>
@@ -75,8 +89,14 @@ MenuActions.propTypes = {
   id: PropTypes.number.isRequired,
   load: PropTypes.func.isRequired,
   noView: PropTypes.bool,
+  noEditable: PropTypes.bool,
+  options: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
 };
 
 MenuActions.defaultProps = {
   noView: false,
+  noEditable: false,
+  options: {},
 };
