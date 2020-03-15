@@ -41,7 +41,7 @@ export default function List({ match }) {
       top: 0,
     });
 
-    const response = await api.get('/deliveryman', {
+    const response = await api.get('/deliverymans', {
       params: {
         q,
         page,

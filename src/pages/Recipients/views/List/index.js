@@ -36,7 +36,7 @@ export default function List({ match }) {
       top: 0,
     });
 
-    const response = await api.get('/recipient', {
+    const response = await api.get('/recipients', {
       params: {
         q,
         page,
