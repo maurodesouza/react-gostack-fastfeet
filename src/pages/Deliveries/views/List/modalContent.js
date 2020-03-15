@@ -5,12 +5,23 @@ import PropTypes from 'prop-types';
 import Modal from '~/components/Modal';
 
 export default function ModalContent({ delivery, ...rest }) {
+  const { recipient } = delivery;
+
   return (
     <Modal {...rest}>
       <h2> Informações da encomenda </h2>
-      <p>{`${delivery.recipient.street}, ${delivery.recipient.number}`}</p>
-      <p>{`${delivery.recipient.city} - ${delivery.recipient.state}`}</p>
-      <p>{delivery.recipient.zip_code}</p>
+      {(recipient && (
+        <>
+          <p>{`${recipient.street}, ${recipient.number}`}</p>
+          <p>{`${recipient.city} - ${recipient.state}`}</p>
+          <p>{recipient.zip_code}</p>
+        </>
+      )) || (
+        <p>
+          As informações do endereço foram excluidas junto com o destinatário !
+        </p>
+      )}
+
       <p>
         <strong>Status: </strong>
         {delivery.status}

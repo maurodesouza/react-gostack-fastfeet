@@ -124,44 +124,54 @@ export default function List({ match }) {
           'Ações',
         ]}
       >
-        {deliveries.map(delivery => (
-          <Tr key={delivery.id} haveProblem={delivery.have_problem}>
-            <td>{delivery.idFormatted}</td>
-            <td>{onlyTwoNames(delivery.recipient.name)}</td>
+        {deliveries.map(delivery => {
+          const { deliveryman, recipient } = delivery;
 
-            <td>
-              <DeliverymanWrapper>
-                {(delivery.deliveryman.avatar && (
-                  <img
-                    src={delivery.deliveryman.avatar.url}
-                    alt={delivery.deliveryman.name}
-                  />
-                )) || (
-                  <NoImage>{firtsLetters(delivery.deliveryman.name)}</NoImage>
-                )}
-                <p>{onlyTwoNames(delivery.deliveryman.name)}</p>
-              </DeliverymanWrapper>
-            </td>
+          return (
+            <Tr key={delivery.id} haveProblem={delivery.have_problem}>
+              <td>{delivery.idFormatted}</td>
 
-            <td>{delivery.recipient.city}</td>
-            <td>{ufConversor(delivery.recipient.state)}</td>
+              <td>
+                {recipient
+                  ? onlyTwoNames(delivery.recipient.name)
+                  : 'Foi Excluido !'}
+              </td>
 
-            <td>
-              <Status status={delivery.status}>
-                <span />
-                {delivery.status}
-              </Status>
-            </td>
+              <td>
+                {(deliveryman && (
+                  <DeliverymanWrapper>
+                    {(deliveryman.avatar && (
+                      <img
+                        src={deliveryman.avatar.url}
+                        alt={deliveryman.name}
+                      />
+                    )) || <NoImage>{firtsLetters(deliveryman.name)}</NoImage>}
+                    <p>{onlyTwoNames(deliveryman.name)}</p>
+                  </DeliverymanWrapper>
+                )) ||
+                  'Foi Excluido !'}
+              </td>
 
-            <td>
-              <MenuActions
-                path={match.path}
-                id={delivery.id}
-                load={loadDeliveries}
-              />
-            </td>
-          </Tr>
-        ))}
+              <td>{recipient ? recipient.city : ''}</td>
+              <td>{recipient ? ufConversor(recipient.state) : ''}</td>
+
+              <td>
+                <Status status={delivery.status}>
+                  <span />
+                  {delivery.status}
+                </Status>
+              </td>
+
+              <td>
+                <MenuActions
+                  path={match.path}
+                  id={delivery.id}
+                  load={loadDeliveries}
+                />
+              </td>
+            </Tr>
+          );
+        })}
       </TableList>
 
       <Pagination
