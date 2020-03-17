@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
 import '~/config/reactotronConfig';
+import '~/config/yup';
 
 import Routes from '~/routes';
 import history from '~/services/history';
