@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Form } from '@unform/web';
+
 import input from '~/components/Form/Input';
 
 export const Container = styled.div`
@@ -13,6 +14,10 @@ export const UnForm = styled(Form)`
   border-radius: 5px;
   padding: 30px;
   margin-top: 30px;
+
+  button {
+    display: none;
+  }
 `;
 
 export const Input = styled(input)`
@@ -30,7 +35,7 @@ export const Input = styled(input)`
   }
 `;
 
-export const SelectWrapper = styled.div`
+export const SelectWrapper = styled.span`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 30px;
