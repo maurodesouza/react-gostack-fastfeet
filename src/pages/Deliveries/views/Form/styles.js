@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Form } from '@unform/web';
 
-import input from '~/components/Form/Input';
+import { Input as input } from '~/components/Form/Inputs';
 
 export const Container = styled.div`
   margin: 30px auto;

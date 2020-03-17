@@ -6,7 +6,7 @@ import { Select } from '~/components/Form/Selects';
 import { options } from './selectContent';
 
 import { Form, SearchWrapper, SelectWrapper } from './styles';
-import Input from '~/components/Form/Input';
+import { Input } from '~/components/Form/Inputs';
 
 export default function HeaderForm({ onSearch, searchOnly, ...rest }) {
   const formRef = useRef(null);

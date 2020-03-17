@@ -5,7 +5,7 @@ import { Form } from '@unform/web';
 import { signInRequest } from '~/store/modules/auth/actions';
 
 import logo from '~/assets/images/logo.svg';
-import Input from '~/components/Form/Input';
+import { Input } from '~/components/Form/Inputs';
 import { Container } from './styles';
 
 export default function SignIn() {
