@@ -6,5 +6,6 @@ export default setLocale({
   },
   string: {
     min: ({ min }) => `Esse campo precisa ter no minimo ${min} caracteres !`,
+    email: 'Envie um email valido !',
   },
 });
