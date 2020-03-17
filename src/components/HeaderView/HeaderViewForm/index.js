@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { MdSearch } from 'react-icons/md';
 
-import Select from '~/components/Form/Select';
+import { Select } from '~/components/Form/Selects';
 import { options } from './selectContent';
 
 import { Form, SearchWrapper, SelectWrapper } from './styles';
