@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { useField } from '@unform/core';
 
 import { Label } from '../Label';
+import { Error } from '../Error';
 
 export default function Input({ name, label, ...rest }) {
   const inputRef = useRef(null);
 
-  const { fieldName, registerField } = useField(name);
+  const { fieldName, registerField, error } = useField(name);
 
   useEffect(() => {
     registerField({
@@ -21,6 +22,7 @@ export default function Input({ name, label, ...rest }) {
     <>
       {label && <Label htmlFor={fieldName}>{label}</Label>}
       <input ref={inputRef} {...rest} />
+      {error && <Error>{error}</Error>}
     </>
   );
 }
