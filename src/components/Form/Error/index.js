@@ -2,6 +2,6 @@ import styled from 'styled-components';
 
 export const Error = styled.span`
   display: block;
-  margin-top: 5px;
+  margin: 5px 0;
   color: #de3b3b;
 `;
