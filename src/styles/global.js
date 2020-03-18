@@ -13,6 +13,10 @@ export default createGlobalStyle`
     height: 100%;
   }
 
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
   body, button, input {
     font: 14px Roboto, sans-serif;
     color: #666;
