@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import MenuActions from '~/components/MenuActions';
 import Pagination from '~/components/Pagination';
+import Animation from '~/components/Animation';
 import HeaderView from '~/components/HeaderView';
 import HeaderViewForm from '~/components/HeaderView/HeaderViewForm';
 import HeaderViewRegisterButton from '~/components/HeaderView/HeaderViewRegisterButton';
@@ -15,6 +16,7 @@ import { firtsLetters } from '~/util/regex';
 import { Container, NoImage, Img } from './styles';
 
 export default function List({ match }) {
+  const [loading, setLoading] = useState(true);
   const [deliverymans, setDeliverymans] = useState([]);
 
   const [q, setQ] = useState('');
@@ -32,10 +34,7 @@ export default function List({ match }) {
   const nextPage = () => setPage(page + 1);
 
   const loadDeliverymans = useCallback(async () => {
-    window.scroll({
-      behavior: 'smooth',
-      top: 0,
-    });
+    setLoading(true);
 
     const response = await api.get('/deliverymans', {
       params: {
@@ -53,6 +52,7 @@ export default function List({ match }) {
 
     setDeliverymans(data);
     setTotalPages(pageTotal);
+    setLoading(false);
   }, [page, q]);
 
   useEffect(() => {
@@ -70,45 +70,54 @@ export default function List({ match }) {
         <HeaderViewRegisterButton path={match.path} />
       </HeaderView>
 
-      {(deliverymans.length && (
-        <>
-          <TableList thead={['ID', 'Foto', 'Nome', 'Email', 'Ações']}>
-            {deliverymans.map(deliveryman => (
-              <tr key={deliveryman.id}>
-                <td>{deliveryman.idFormatted}</td>
+      {!loading &&
+        (deliverymans.length ? (
+          <Animation>
+            <TableList thead={['ID', 'Foto', 'Nome', 'Email', 'Ações']}>
+              {deliverymans.map(deliveryman => (
+                <tr key={deliveryman.id}>
+                  <td>{deliveryman.idFormatted}</td>
 
-                <td>
-                  {(deliveryman.avatar && (
-                    <Img src={deliveryman.avatar.url} alt={deliveryman.name} />
-                  )) || <NoImage>{firtsLetters(deliveryman.name)}</NoImage>}
-                </td>
+                  <td>
+                    {(deliveryman.avatar && (
+                      <Img
+                        src={deliveryman.avatar.url}
+                        alt={deliveryman.name}
+                      />
+                    )) || <NoImage>{firtsLetters(deliveryman.name)}</NoImage>}
+                  </td>
 
-                <td>{deliveryman.name}</td>
+                  <td>{deliveryman.name}</td>
 
-                <td>{deliveryman.email}</td>
+                  <td>{deliveryman.email}</td>
 
-                <td>
-                  <MenuActions
-                    noView
-                    options={{
-                      deleteSuccessMessage: 'Entregador deletado com sucesso !',
-                    }}
-                    path={match.path}
-                    id={deliveryman.id}
-                    load={loadDeliverymans}
-                  />
-                </td>
-              </tr>
-            ))}
-          </TableList>
-          <Pagination
-            currentPage={page}
-            totalPages={totalPages}
-            backPage={backPage}
-            nextPage={nextPage}
-          />{' '}
-        </>
-      )) || <NoResult />}
+                  <td>
+                    <MenuActions
+                      noView
+                      options={{
+                        deleteSuccessMessage:
+                          'Entregador deletado com sucesso !',
+                      }}
+                      path={match.path}
+                      id={deliveryman.id}
+                      load={loadDeliverymans}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </TableList>
+            <Pagination
+              currentPage={page}
+              totalPages={totalPages}
+              backPage={backPage}
+              nextPage={nextPage}
+            />{' '}
+          </Animation>
+        ) : (
+          <Animation>
+            <NoResult />
+          </Animation>
+        ))}
     </Container>
   );
 }

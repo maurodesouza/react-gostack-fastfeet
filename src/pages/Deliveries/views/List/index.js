@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 
 import Pagination from '~/components/Pagination';
+import Animation from '~/components/Animation';
 import NoResult from '~/components/NoResult';
 import HeaderView from '~/components/HeaderView';
 import HeaderViewForm from '~/components/HeaderView/HeaderViewForm';
@@ -17,6 +18,7 @@ import history from '~/services/history';
 import { Container } from './styles';
 
 export default function List({ match }) {
+  const [loading, setLoading] = useState(true);
   const [deliveries, setDeliveries] = useState([]);
   const [modalDelivery, setModalDelivery] = useState(null);
 
@@ -37,10 +39,7 @@ export default function List({ match }) {
   const nextPage = () => setPage(page + 1);
 
   const loadDeliveries = useCallback(async () => {
-    window.scroll({
-      behavior: 'smooth',
-      top: 0,
-    });
+    setLoading(true);
 
     const response = await api.get('/deliveries', {
       params: {
@@ -59,6 +58,7 @@ export default function List({ match }) {
 
     setDeliveries(data);
     setTotalPages(pageTotal);
+    setLoading(false);
   }, [page, q, state]);
 
   useEffect(() => {
@@ -104,28 +104,38 @@ export default function List({ match }) {
         <HeaderViewRegisterButton path={match.path} />
       </HeaderView>
 
-      {(deliveries.length && (
-        <>
-          {' '}
-          <TableList
-            path={match.path}
-            load={loadDeliveries}
-            deliveries={deliveries}
-          />
-          <Pagination
-            currentPage={page}
-            totalPages={totalPages}
-            backPage={backPage}
-            nextPage={nextPage}
-          />{' '}
-        </>
-      )) || <NoResult />}
+      {!loading &&
+        (deliveries.length ? (
+          <Animation>
+            {' '}
+            <TableList
+              path={match.path}
+              load={loadDeliveries}
+              deliveries={deliveries}
+            />
+            <Pagination
+              currentPage={page}
+              totalPages={totalPages}
+              backPage={backPage}
+              nextPage={nextPage}
+            />{' '}
+          </Animation>
+        ) : (
+          <Animation>
+            <NoResult />
+          </Animation>
+        ))}
 
       {modalDelivery && (
-        <Modal
-          onClose={() => [history.push('/deliveries'), setModalDelivery(null)]}
-          delivery={modalDelivery}
-        />
+        <Animation>
+          <Modal
+            onClose={() => [
+              history.push('/deliveries'),
+              setModalDelivery(null),
+            ]}
+            delivery={modalDelivery}
+          />
+        </Animation>
       )}
     </Container>
   );

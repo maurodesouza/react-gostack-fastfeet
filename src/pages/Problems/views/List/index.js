@@ -5,6 +5,7 @@ import { format, parseISO } from 'date-fns';
 
 import MenuActions from '~/components/MenuActions';
 import Pagination from '~/components/Pagination';
+import Animation from '~/components/Animation';
 import HeaderView from '~/components/HeaderView';
 import TableList from '~/components/TableList';
 import Modal from '~/components/Modal';
@@ -17,6 +18,7 @@ import { yet100Digits } from '~/util/regex';
 import { Container } from './styles';
 
 export default function List({ match }) {
+  const [loading, setLoading] = useState(true);
   const [problems, setProblems] = useState([]);
   const [modalProblems, setModalProblems] = useState(null);
 
@@ -29,10 +31,7 @@ export default function List({ match }) {
   const nextPage = () => setPage(page + 1);
 
   const loadProblems = useCallback(async () => {
-    window.scroll({
-      behavior: 'smooth',
-      top: 0,
-    });
+    setLoading(true);
 
     const response = await api.get('/deliveries', {
       params: {
@@ -50,6 +49,7 @@ export default function List({ match }) {
 
     setProblems(data);
     setTotalPages(pageTotal);
+    setLoading(false);
   }, [page]);
 
   useEffect(() => {
@@ -80,50 +80,55 @@ export default function List({ match }) {
   return (
     <Container>
       <HeaderView title="Problemas na entrega" />
-      {(problems.length && (
-        <>
-          {' '}
-          <TableList thead={['Encomenda', 'Problema', 'Ações']}>
-            {problems.map(problem => {
-              const { delivery_problems } = problem;
+      {!loading &&
+        (problems.length ? (
+          <Animation>
+            {' '}
+            <TableList thead={['Encomenda', 'Problema', 'Ações']}>
+              {problems.map(problem => {
+                const { delivery_problems } = problem;
 
-              return (
-                <tr key={problem.id}>
-                  <td>{problem.idFormatted}</td>
+                return (
+                  <tr key={problem.id}>
+                    <td>{problem.idFormatted}</td>
 
-                  <td>
-                    {delivery_problems.length > 1 &&
-                      `( ${delivery_problems.length} )`}{' '}
-                    {yet100Digits(delivery_problems[0].description)}
-                  </td>
+                    <td>
+                      {delivery_problems.length > 1 &&
+                        `( ${delivery_problems.length} )`}{' '}
+                      {yet100Digits(delivery_problems[0].description)}
+                    </td>
 
-                  <td>
-                    <MenuActions
-                      noEditable
-                      options={{
-                        deleteUrlSuffix: '/cancel-delivery',
-                        deleteLabel: 'Cancelar',
-                        deleteSuccessMessage:
-                          'Encomenda cancelada com sucesso !',
-                        deleteId: delivery_problems[0].id,
-                      }}
-                      path={match.path}
-                      id={problem.id}
-                      load={loadProblems}
-                    />
-                  </td>
-                </tr>
-              );
-            })}
-          </TableList>
-          <Pagination
-            currentPage={page}
-            totalPages={totalPages}
-            backPage={backPage}
-            nextPage={nextPage}
-          />
-        </>
-      )) || <NoResult />}
+                    <td>
+                      <MenuActions
+                        noEditable
+                        options={{
+                          deleteUrlSuffix: '/cancel-delivery',
+                          deleteLabel: 'Cancelar',
+                          deleteSuccessMessage:
+                            'Encomenda cancelada com sucesso !',
+                          deleteId: delivery_problems[0].id,
+                        }}
+                        path={match.path}
+                        id={problem.id}
+                        load={loadProblems}
+                      />
+                    </td>
+                  </tr>
+                );
+              })}
+            </TableList>
+            <Pagination
+              currentPage={page}
+              totalPages={totalPages}
+              backPage={backPage}
+              nextPage={nextPage}
+            />
+          </Animation>
+        ) : (
+          <Animation>
+            <NoResult />
+          </Animation>
+        ))}
 
       {modalProblems && (
         <Modal

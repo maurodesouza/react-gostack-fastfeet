@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import MenuActions from '~/components/MenuActions';
 import Pagination from '~/components/Pagination';
 import HeaderView from '~/components/HeaderView';
+import Animation from '~/components/Animation';
 import HeaderViewForm from '~/components/HeaderView/HeaderViewForm';
 import HeaderViewRegisterButton from '~/components/HeaderView/HeaderViewRegisterButton';
 import TableList from '~/components/TableList';
@@ -15,6 +16,7 @@ import api from '~/services/api';
 import { Container } from './styles';
 
 export default function List({ match }) {
+  const [loading, setLoading] = useState(true);
   const [recipients, setRecipients] = useState([]);
 
   const [q, setQ] = useState('');
@@ -32,10 +34,7 @@ export default function List({ match }) {
   const nextPage = () => setPage(page + 1);
 
   const loadRecipients = useCallback(async () => {
-    window.scroll({
-      behavior: 'smooth',
-      top: 0,
-    });
+    setLoading(true);
 
     const response = await api.get('/recipients', {
       params: {
@@ -56,6 +55,7 @@ export default function List({ match }) {
 
     setRecipients(data);
     setTotalPages(pageTotal);
+    setLoading(false);
   }, [page, q]);
 
   useEffect(() => {
@@ -73,41 +73,46 @@ export default function List({ match }) {
         <HeaderViewRegisterButton path={match.path} />
       </HeaderView>
 
-      {(recipients.length && (
-        <>
-          {' '}
-          <TableList thead={['ID', 'Nome', 'Endereço', 'Ações']}>
-            {recipients.map(recipient => (
-              <tr key={recipient.id}>
-                <td>{recipient.idFormatted}</td>
+      {!loading &&
+        (recipients.length ? (
+          <Animation>
+            {' '}
+            <TableList thead={['ID', 'Nome', 'Endereço', 'Ações']}>
+              {recipients.map(recipient => (
+                <tr key={recipient.id}>
+                  <td>{recipient.idFormatted}</td>
 
-                <td>{recipient.name}</td>
+                  <td>{recipient.name}</td>
 
-                <td>{recipient.address}</td>
+                  <td>{recipient.address}</td>
 
-                <td>
-                  <MenuActions
-                    noView
-                    options={{
-                      deleteSuccessMessage:
-                        'Destinatário deletado com sucesso !',
-                    }}
-                    path={match.path}
-                    id={recipient.id}
-                    load={loadRecipients}
-                  />
-                </td>
-              </tr>
-            ))}
-          </TableList>
-          <Pagination
-            currentPage={page}
-            totalPages={totalPages}
-            backPage={backPage}
-            nextPage={nextPage}
-          />{' '}
-        </>
-      )) || <NoResult />}
+                  <td>
+                    <MenuActions
+                      noView
+                      options={{
+                        deleteSuccessMessage:
+                          'Destinatário deletado com sucesso !',
+                      }}
+                      path={match.path}
+                      id={recipient.id}
+                      load={loadRecipients}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </TableList>
+            <Pagination
+              currentPage={page}
+              totalPages={totalPages}
+              backPage={backPage}
+              nextPage={nextPage}
+            />{' '}
+          </Animation>
+        ) : (
+          <Animation>
+            <NoResult />
+          </Animation>
+        ))}
     </Container>
   );
 }
