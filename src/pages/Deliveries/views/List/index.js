@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
+
+import { toast } from 'react-toastify';
 
 import Pagination from '~/components/Pagination';
 import Animation from '~/components/Animation';
@@ -9,13 +10,13 @@ import HeaderView from '~/components/HeaderView';
 import HeaderViewForm from '~/components/HeaderView/HeaderViewForm';
 import HeaderViewRegisterButton from '~/components/HeaderView/HeaderViewRegisterButton';
 
-import Modal from './modalContent';
-import TableList from './tableListContent';
-
 import api from '~/services/api';
 import history from '~/services/history';
 
-import { Container } from './styles';
+import Modal from './modalContent';
+import TableList from './tableListContent';
+
+import * as S from './styles';
 
 export default function List({ match }) {
   const [loading, setLoading] = useState(true);
@@ -95,7 +96,7 @@ export default function List({ match }) {
   }, [match]);
 
   return (
-    <Container teste={deliveries}>
+    <S.Container teste={deliveries}>
       <HeaderView title="Gerenciando encomendas">
         <HeaderViewForm
           placeholder="Buscar por encomendas"
@@ -137,7 +138,7 @@ export default function List({ match }) {
           />
         </Animation>
       )}
-    </Container>
+    </S.Container>
   );
 }
 

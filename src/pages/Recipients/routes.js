@@ -1,6 +1,7 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+import { Switch, Route } from 'react-router-dom';
 
 import List from './views/List';
 import Form from './views/Form';

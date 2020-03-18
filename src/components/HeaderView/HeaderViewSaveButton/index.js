@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Button, Icon } from './styles';
+import * as S from './styles';
 
 export default function SaveButton({ ...rest }) {
   return (
-    <Button type="button" {...rest}>
-      <Icon /> Salvar
-    </Button>
+    <S.Button type="button" {...rest}>
+      <S.Icon /> Salvar
+    </S.Button>
   );
 }

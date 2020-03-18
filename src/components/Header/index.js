@@ -1,17 +1,18 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+
 import { NavLink } from 'react-router-dom';
 
-import logo from '~/assets/images/logo.svg';
-import { Container } from './styles';
-
 import { signOut } from '~/store/modules/auth/actions';
+import logo from '~/assets/images/logo.svg';
+
+import * as S from './styles';
 
 export default function Header() {
   const dispatch = useDispatch();
 
   return (
-    <Container>
+    <S.Container>
       <div>
         <img src={logo} alt="Fastfeet logo" />
         <nav>
@@ -27,6 +28,6 @@ export default function Header() {
           sair do sistema
         </button>
       </aside>
-    </Container>
+    </S.Container>
   );
 }

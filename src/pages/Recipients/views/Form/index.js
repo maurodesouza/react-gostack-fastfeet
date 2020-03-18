@@ -1,14 +1,12 @@
 import React, { useEffect, useRef } from 'react';
-import { toast } from 'react-toastify';
-
+import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 
-import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 
 import HeaderView from '~/components/HeaderView';
 import HeaderViewBackButton from '~/components/HeaderView/HeaderViewBackButton';
 import HeaderViewSaveButton from '~/components/HeaderView/HeaderViewSaveButton';
-
 import { SelectAsync } from '~/components/Form/Selects';
 
 import api from '~/services/api';
@@ -19,7 +17,7 @@ import ufConversor from '~/util/ufConversor';
 
 import { options } from './selectContent';
 
-import { Container, UnForm, Input, InputMask, Wrapper } from './styles';
+import * as S from './styles';
 
 export default function Form({ match }) {
   const formRef = useRef(null);
@@ -133,7 +131,7 @@ export default function Form({ match }) {
   }, [match]);
 
   return (
-    <Container>
+    <S.Container>
       <HeaderView
         title={
           match.path === '/recipients/add'
@@ -146,34 +144,34 @@ export default function Form({ match }) {
         <HeaderViewSaveButton onClick={() => formRef.current.submitForm()} />
       </HeaderView>
 
-      <UnForm ref={formRef} onSubmit={validation}>
-        <Wrapper columns={2}>
-          <Input name="name" label="Nome" placeholder="Nome  ..." />
+      <S.UnForm ref={formRef} onSubmit={validation}>
+        <S.Wrapper columns={2}>
+          <S.Input name="name" label="Nome" placeholder="Nome  ..." />
 
-          <Input
+          <S.Input
             name="email"
             label="Email"
             placeholder="example@fastfeet.com"
           />
-        </Wrapper>
+        </S.Wrapper>
 
-        <Wrapper>
-          <Input name="street" label="Rua" placeholder="Rua ..." />
-          <Input
+        <S.Wrapper>
+          <S.Input name="street" label="Rua" placeholder="Rua ..." />
+          <S.Input
             name="number"
             type="number"
             label="Número"
             placeholder="0000"
           />
-          <Input
+          <S.Input
             name="complement"
             label="Complemento"
             placeholder="Complemento ..."
           />
-        </Wrapper>
+        </S.Wrapper>
 
-        <Wrapper>
-          <Input name="city" label="Cidade" placeholder="Cidade ..." />
+        <S.Wrapper>
+          <S.Input name="city" label="Cidade" placeholder="Cidade ..." />
           <SelectAsync
             name="state"
             label="Estado"
@@ -182,17 +180,17 @@ export default function Form({ match }) {
             defaultOptions
             noOptionsMessage={() => 'Nenhum estado foi encontrado !'}
           />
-          <InputMask
+          <S.InputMask
             name="zip_code"
             label="CEP"
             placeholder="CEP ..."
             mask="99999-999"
           />
-        </Wrapper>
+        </S.Wrapper>
 
         <button type="submit"> * </button>
-      </UnForm>
-    </Container>
+      </S.UnForm>
+    </S.Container>
   );
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Container, Wrapper } from './styles';
+import * as S from './styles';
 
 export default function Modal({ children, onClose }) {
   const onModalClose = e => {
@@ -9,9 +9,9 @@ export default function Modal({ children, onClose }) {
   };
 
   return (
-    <Container onClick={onModalClose}>
-      <Wrapper>{children}</Wrapper>
-    </Container>
+    <S.Container onClick={onModalClose}>
+      <S.Wrapper>{children}</S.Wrapper>
+    </S.Container>
   );
 }
 

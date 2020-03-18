@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from 'react';
-import ReactSelect from 'react-select/async';
-import { useField } from '@unform/core';
 import PropTypes from 'prop-types';
+import { useField } from '@unform/core';
 
-import { Container, defaultStyles } from './styles';
+import ReactSelect from 'react-select/async';
+
 import { Label } from '../Label';
 import { Error } from '../Error';
+
+import * as S from './styles';
 
 export default function Select({ name, label, ...rest }) {
   const selectRef = useRef(null);
@@ -39,18 +41,18 @@ export default function Select({ name, label, ...rest }) {
   }, [fieldName, registerField, rest.isMulti]);
 
   return (
-    <Container>
+    <S.Container>
       {label && <Label htmlFor={fieldName}>{label}</Label>}
       <ReactSelect
         cacheOptions
         defaultValue={defaultValue}
         ref={selectRef}
         classNamePrefix="react-select"
-        styles={defaultStyles}
+        styles={S.defaultStyles}
         {...rest}
       />
       {error && <Error>{error}</Error>}
-    </Container>
+    </S.Container>
   );
 }
 

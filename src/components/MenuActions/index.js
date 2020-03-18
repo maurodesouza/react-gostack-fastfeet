@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import { Link } from 'react-router-dom';
 import { MdRemoveRedEye, MdCreate, MdDeleteForever } from 'react-icons/md';
 import { IoMdAlert } from 'react-icons/io';
 import { toast } from 'react-toastify';
-import PropTypes from 'prop-types';
 
 import api from '~/services/api';
-import { Container, Icon, ActionsList, DeleteButton } from './styles';
+
+import * as S from './styles';
 
 export default function MenuActions({
   path,
@@ -52,14 +54,14 @@ export default function MenuActions({
   };
 
   return (
-    <Container>
-      <Icon onClick={() => setVisible(!visible)}>
+    <S.Container>
+      <S.Icon onClick={() => setVisible(!visible)}>
         <span />
         <span />
         <span />
-      </Icon>
+      </S.Icon>
 
-      <ActionsList visible={visible}>
+      <S.ActionsList visible={visible}>
         {!noView && (
           <Link to={`${path}/${id}`} onClick={() => setVisible(false)}>
             <MdRemoveRedEye color="#8e5be8" /> Visualizar
@@ -72,7 +74,7 @@ export default function MenuActions({
           </Link>
         )}
 
-        <DeleteButton onClick={onDelete} confirm={confirm}>
+        <S.DeleteButton onClick={onDelete} confirm={confirm}>
           {confirm ? (
             <>
               <IoMdAlert color="#c1bc35" /> Confirmar !
@@ -83,9 +85,9 @@ export default function MenuActions({
               {options.deleteLabel || 'Deletar'}
             </>
           )}
-        </DeleteButton>
-      </ActionsList>
-    </Container>
+        </S.DeleteButton>
+      </S.ActionsList>
+    </S.Container>
   );
 }
 

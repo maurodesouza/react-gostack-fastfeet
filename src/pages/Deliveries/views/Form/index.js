@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 
 import * as Yup from 'yup';
-
-import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 
 import HeaderView from '~/components/HeaderView';
 import HeaderViewBackButton from '~/components/HeaderView/HeaderViewBackButton';
@@ -13,7 +12,7 @@ import { SelectAsync } from '~/components/Form/Selects';
 import api from '~/services/api';
 import history from '~/services/history';
 
-import { Container, UnForm, Input, SelectWrapper } from './styles';
+import * as S from './styles';
 
 export default function Form({ match }) {
   const formRef = useRef(null);
@@ -146,7 +145,7 @@ export default function Form({ match }) {
   }, [match]);
 
   return (
-    <Container>
+    <S.Container>
       <HeaderView
         title={
           match.path === '/deliveries/add'
@@ -159,8 +158,8 @@ export default function Form({ match }) {
         <HeaderViewSaveButton onClick={() => formRef.current.submitForm()} />
       </HeaderView>
 
-      <UnForm ref={formRef} onSubmit={validation}>
-        <SelectWrapper>
+      <S.UnForm ref={formRef} onSubmit={validation}>
+        <S.SelectWrapper>
           <SelectAsync
             placeholder="Nome do destinatário ..."
             name="recipient_id"
@@ -177,17 +176,17 @@ export default function Form({ match }) {
             defaultOptions
             noOptionsMessage={() => 'Nenhum Entregador foi encontrado !'}
           />
-        </SelectWrapper>
+        </S.SelectWrapper>
 
-        <Input
+        <S.Input
           name="product"
           label="Nome do produto"
           placeholder="Nome do produto ..."
         />
 
         <button type="submit"> * </button>
-      </UnForm>
-    </Container>
+      </S.UnForm>
+    </S.Container>
   );
 }
 

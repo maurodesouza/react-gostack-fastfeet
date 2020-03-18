@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { FadeIn } from './styles';
+import * as S from './styles';
 
 export default function Animation({ children }) {
-  return <FadeIn>{children}</FadeIn>;
+  return <S.FadeIn>{children}</S.FadeIn>;
 }
 
 Animation.propTypes = {

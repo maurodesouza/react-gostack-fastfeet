@@ -1,8 +1,9 @@
 import React from 'react';
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import PropTypes from 'prop-types';
 
-import { WrapperPagination } from './styles';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+
+import * as S from './styles';
 
 export default function Pagination({
   currentPage,
@@ -11,7 +12,7 @@ export default function Pagination({
   nextPage,
 }) {
   return (
-    <WrapperPagination>
+    <S.Container>
       <button type="button" onClick={backPage} disabled={currentPage === 1}>
         <MdKeyboardArrowLeft size={30} />
       </button>
@@ -25,7 +26,7 @@ export default function Pagination({
       >
         <MdKeyboardArrowRight size={30} />
       </button>
-    </WrapperPagination>
+    </S.Container>
   );
 }
 

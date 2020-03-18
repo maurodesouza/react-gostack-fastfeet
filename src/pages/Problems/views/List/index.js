@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
+
+import { toast } from 'react-toastify';
 import { format, parseISO } from 'date-fns';
 
 import MenuActions from '~/components/MenuActions';
@@ -15,7 +16,7 @@ import api from '~/services/api';
 import history from '~/services/history';
 import { yet100Digits } from '~/util/regex';
 
-import { Container } from './styles';
+import * as S from './styles';
 
 export default function List({ match }) {
   const [loading, setLoading] = useState(true);
@@ -78,7 +79,7 @@ export default function List({ match }) {
   }, [match]);
 
   return (
-    <Container>
+    <S.Container>
       <HeaderView title="Problemas na entrega" />
       {!loading &&
         (problems.length ? (
@@ -150,7 +151,7 @@ export default function List({ match }) {
           </div>
         </Modal>
       )}
-    </Container>
+    </S.Container>
   );
 }
 

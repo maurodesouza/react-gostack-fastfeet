@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Table } from './styles';
+import * as S from './styles';
 
 export default function TableList({ thead, children }) {
   return (
-    <Table>
+    <S.Table>
       <thead>
         <tr>
           {thead.map(text => (
@@ -14,7 +14,7 @@ export default function TableList({ thead, children }) {
         </tr>
       </thead>
       <tbody>{children}</tbody>
-    </Table>
+    </S.Table>
   );
 }
 

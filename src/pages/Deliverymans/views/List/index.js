@@ -13,7 +13,7 @@ import NoResult from '~/components/NoResult';
 import api from '~/services/api';
 import { firtsLetters } from '~/util/regex';
 
-import { Container, NoImage, Img } from './styles';
+import * as S from './styles';
 
 export default function List({ match }) {
   const [loading, setLoading] = useState(true);
@@ -60,7 +60,7 @@ export default function List({ match }) {
   }, [loadDeliverymans]);
 
   return (
-    <Container>
+    <S.Container>
       <HeaderView title="Gerenciando entregadores">
         <HeaderViewForm
           searchOnly
@@ -80,11 +80,13 @@ export default function List({ match }) {
 
                   <td>
                     {(deliveryman.avatar && (
-                      <Img
+                      <S.Img
                         src={deliveryman.avatar.url}
                         alt={deliveryman.name}
                       />
-                    )) || <NoImage>{firtsLetters(deliveryman.name)}</NoImage>}
+                    )) || (
+                      <S.NoImage>{firtsLetters(deliveryman.name)}</S.NoImage>
+                    )}
                   </td>
 
                   <td>{deliveryman.name}</td>
@@ -118,7 +120,7 @@ export default function List({ match }) {
             <NoResult />
           </Animation>
         ))}
-    </Container>
+    </S.Container>
   );
 }
 

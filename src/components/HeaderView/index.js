@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Container } from './styles';
+import * as S from './styles';
 
 export default function HeaderView({ title, isToForm, children }) {
   return (
-    <Container isToForm={isToForm} existChildren={!!children}>
+    <S.Container isToForm={isToForm} existChildren={!!children}>
       <h1>{title}</h1>
       {children && <div>{children}</div>}
-    </Container>
+    </S.Container>
   );
 }
 

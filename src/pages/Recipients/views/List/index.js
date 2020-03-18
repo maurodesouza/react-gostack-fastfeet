@@ -13,7 +13,7 @@ import NoResult from '~/components/NoResult';
 import ufConversor from '~/util/ufConversor';
 import api from '~/services/api';
 
-import { Container } from './styles';
+import * as S from './styles';
 
 export default function List({ match }) {
   const [loading, setLoading] = useState(true);
@@ -63,7 +63,7 @@ export default function List({ match }) {
   }, [loadRecipients]);
 
   return (
-    <Container>
+    <S.Container>
       <HeaderView title="Gerenciando destinatários">
         <HeaderViewForm
           searchOnly
@@ -113,7 +113,7 @@ export default function List({ match }) {
             <NoResult />
           </Animation>
         ))}
-    </Container>
+    </S.Container>
   );
 }
 

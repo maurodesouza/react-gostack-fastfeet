@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import ReactInputMask from 'react-input-mask';
 import PropTypes from 'prop-types';
 import { useField } from '@unform/core';
+
+import ReactInputMask from 'react-input-mask';
 
 import { Label } from '~/components/Form/Label';
 import { Error } from '~/components/Form/Error';

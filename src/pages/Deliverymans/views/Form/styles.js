@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { Form } from '@unform/web';
 
+import { Form } from '@unform/web';
 import { Input as input } from '~/components/Form/Inputs';
 
 export const Container = styled.div`

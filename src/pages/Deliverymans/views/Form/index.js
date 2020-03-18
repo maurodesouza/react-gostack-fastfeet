@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { toast } from 'react-toastify';
-
+import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 
-import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 
 import HeaderView from '~/components/HeaderView';
 import HeaderViewBackButton from '~/components/HeaderView/HeaderViewBackButton';
@@ -14,7 +13,7 @@ import api from '~/services/api';
 import history from '~/services/history';
 import { atLeastTwoNames } from '~/util/regex';
 
-import { Container, UnForm, Input } from './styles';
+import * as S from './styles';
 
 export default function Form({ match }) {
   const formRef = useRef(null);
@@ -135,7 +134,7 @@ export default function Form({ match }) {
   }, [match]);
 
   return (
-    <Container>
+    <S.Container>
       <HeaderView
         title={
           match.path === '/deliverymans/add'
@@ -148,15 +147,19 @@ export default function Form({ match }) {
         <HeaderViewSaveButton onClick={() => formRef.current.submitForm()} />
       </HeaderView>
 
-      <UnForm ref={formRef} onSubmit={validation}>
+      <S.UnForm ref={formRef} onSubmit={validation}>
         <AvatarInput name="avatar" />
-        <Input name="name" label="Nome" placeholder="Nome  ..." />
+        <S.Input name="name" label="Nome" placeholder="Nome  ..." />
 
-        <Input name="email" label="Email" placeholder="example@fastfeet.com" />
+        <S.Input
+          name="email"
+          label="Email"
+          placeholder="example@fastfeet.com"
+        />
 
         <button type="submit"> * </button>
-      </UnForm>
-    </Container>
+      </S.UnForm>
+    </S.Container>
   );
 }
 

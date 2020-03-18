@@ -1,12 +1,12 @@
 import React from 'react';
 
 import history from '~/services/history';
-import { Button, Icon } from './styles';
+import * as S from './styles';
 
 export default function BackButton() {
   return (
-    <Button onClick={() => history.goBack()} type="button">
-      <Icon /> Voltar
-    </Button>
+    <S.Button onClick={() => history.goBack()} type="button">
+      <S.Icon /> Voltar
+    </S.Button>
   );
 }

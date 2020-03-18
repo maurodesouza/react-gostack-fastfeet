@@ -1,12 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { Form } from '@unform/web';
 
-import { signInRequest } from '~/store/modules/auth/actions';
-
-import logo from '~/assets/images/logo.svg';
 import { Input } from '~/components/Form/Inputs';
-import { Container } from './styles';
+
+import { signInRequest } from '~/store/modules/auth/actions';
+import logo from '~/assets/images/logo.svg';
+
+import * as S from './styles';
 
 export default function SignIn() {
   const dispatch = useDispatch();
@@ -18,7 +20,7 @@ export default function SignIn() {
   };
 
   return (
-    <Container>
+    <S.Container>
       <Form onSubmit={onSubmit}>
         <img src={logo} alt="Fastfeet logo" />
         <Input
@@ -36,6 +38,6 @@ export default function SignIn() {
           {loading ? 'Caregando ...' : 'Entrar no sistema'}
         </button>
       </Form>
-    </Container>
+    </S.Container>
   );
 }

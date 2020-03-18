@@ -7,7 +7,7 @@ import MenuActions from '~/components/MenuActions';
 import { firtsLetters, onlyTwoNames } from '~/util/regex';
 import ufConversor from '~/util/ufConversor';
 
-import { Status, Tr, DeliverymanWrapper, NoImage } from './styles';
+import * as S from './styles';
 
 export default function TableListContent({ deliveries, path, load }) {
   return (
@@ -26,7 +26,7 @@ export default function TableListContent({ deliveries, path, load }) {
         const { deliveryman, recipient } = delivery;
 
         return (
-          <Tr key={delivery.id} haveProblem={delivery.have_problem}>
+          <S.Tr key={delivery.id} haveProblem={delivery.have_problem}>
             <td>{delivery.idFormatted}</td>
 
             <td>
@@ -37,12 +37,12 @@ export default function TableListContent({ deliveries, path, load }) {
 
             <td>
               {(deliveryman && (
-                <DeliverymanWrapper>
+                <S.DeliverymanWrapper>
                   {(deliveryman.avatar && (
                     <img src={deliveryman.avatar.url} alt={deliveryman.name} />
-                  )) || <NoImage>{firtsLetters(deliveryman.name)}</NoImage>}
+                  )) || <S.NoImage>{firtsLetters(deliveryman.name)}</S.NoImage>}
                   <p>{onlyTwoNames(deliveryman.name)}</p>
-                </DeliverymanWrapper>
+                </S.DeliverymanWrapper>
               )) ||
                 'Foi Excluido !'}
             </td>
@@ -51,10 +51,10 @@ export default function TableListContent({ deliveries, path, load }) {
             <td>{recipient ? ufConversor(recipient.state) : ''}</td>
 
             <td>
-              <Status status={delivery.status}>
+              <S.Status status={delivery.status}>
                 <span />
                 {delivery.status}
-              </Status>
+              </S.Status>
             </td>
 
             <td>
@@ -67,7 +67,7 @@ export default function TableListContent({ deliveries, path, load }) {
                 load={load}
               />
             </td>
-          </Tr>
+          </S.Tr>
         );
       })}
     </TableList>

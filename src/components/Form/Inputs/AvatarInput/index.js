@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useField } from '@unform/core';
+
 import { MdImage } from 'react-icons/md';
 
-import { Container, Wrapper } from './styles';
+import * as S from './styles';
 
 export default function AvatarInput({ name }) {
   const inputRef = useRef(null);
@@ -38,18 +39,18 @@ export default function AvatarInput({ name }) {
   }, [fieldName, registerField]);
 
   return (
-    <Container>
+    <S.Container>
       <label htmlFor={fieldName}>
         {(preview && <img src={preview} alt="" />) || (
-          <Wrapper>
+          <S.Wrapper>
             <MdImage size={60} color="#ddd" />
             <span>Adicionar foto</span>
-          </Wrapper>
+          </S.Wrapper>
         )}
 
         <input id="avatar" type="file" ref={inputRef} onChange={previewImage} />
       </label>
-    </Container>
+    </S.Container>
   );
 }
 
