@@ -147,7 +147,14 @@ export default function Form({ match }) {
 
   return (
     <Container>
-      <HeaderView title="Cadastro de encomendas" isToForm>
+      <HeaderView
+        title={
+          match.path === '/deliveries/add'
+            ? 'Cadastro de encomendas'
+            : 'Edição de encomendas'
+        }
+        isToForm
+      >
         <HeaderViewBackButton />
         <HeaderViewSaveButton onClick={() => formRef.current.submitForm()} />
       </HeaderView>
