@@ -28,6 +28,10 @@ export const defaultStyles = {
     ...provider,
     color: '#999',
   }),
+  indicatorSeparator: provider => ({
+    ...provider,
+    display: 'none',
+  }),
   dropdownIndicator: provider => ({
     ...provider,
     color: '#999',
