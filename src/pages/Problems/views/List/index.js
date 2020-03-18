@@ -8,6 +8,7 @@ import Pagination from '~/components/Pagination';
 import HeaderView from '~/components/HeaderView';
 import TableList from '~/components/TableList';
 import Modal from '~/components/Modal';
+import NoResult from '~/components/NoResult';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -79,45 +80,50 @@ export default function List({ match }) {
   return (
     <Container>
       <HeaderView title="Problemas na entrega" />
-      <TableList thead={['Encomenda', 'Problema', 'Ações']}>
-        {problems.map(problem => {
-          const { delivery_problems } = problem;
+      {(problems.length && (
+        <>
+          {' '}
+          <TableList thead={['Encomenda', 'Problema', 'Ações']}>
+            {problems.map(problem => {
+              const { delivery_problems } = problem;
 
-          return (
-            <tr key={problem.id}>
-              <td>{problem.idFormatted}</td>
+              return (
+                <tr key={problem.id}>
+                  <td>{problem.idFormatted}</td>
 
-              <td>
-                {delivery_problems.length > 1 &&
-                  `( ${delivery_problems.length} )`}{' '}
-                {yet100Digits(delivery_problems[0].description)}
-              </td>
+                  <td>
+                    {delivery_problems.length > 1 &&
+                      `( ${delivery_problems.length} )`}{' '}
+                    {yet100Digits(delivery_problems[0].description)}
+                  </td>
 
-              <td>
-                <MenuActions
-                  noEditable
-                  options={{
-                    deleteUrlSuffix: '/cancel-delivery',
-                    deleteLabel: 'Cancelar',
-                    deleteSuccessMessage: 'Encomenda cancelada com sucesso !',
-                    deleteId: delivery_problems[0].id,
-                  }}
-                  path={match.path}
-                  id={problem.id}
-                  load={loadProblems}
-                />
-              </td>
-            </tr>
-          );
-        })}
-      </TableList>
-
-      <Pagination
-        currentPage={page}
-        totalPages={totalPages}
-        backPage={backPage}
-        nextPage={nextPage}
-      />
+                  <td>
+                    <MenuActions
+                      noEditable
+                      options={{
+                        deleteUrlSuffix: '/cancel-delivery',
+                        deleteLabel: 'Cancelar',
+                        deleteSuccessMessage:
+                          'Encomenda cancelada com sucesso !',
+                        deleteId: delivery_problems[0].id,
+                      }}
+                      path={match.path}
+                      id={problem.id}
+                      load={loadProblems}
+                    />
+                  </td>
+                </tr>
+              );
+            })}
+          </TableList>
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            backPage={backPage}
+            nextPage={nextPage}
+          />
+        </>
+      )) || <NoResult />}
 
       {modalProblems && (
         <Modal

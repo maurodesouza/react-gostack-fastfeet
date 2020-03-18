@@ -7,6 +7,7 @@ import HeaderView from '~/components/HeaderView';
 import HeaderViewForm from '~/components/HeaderView/HeaderViewForm';
 import HeaderViewRegisterButton from '~/components/HeaderView/HeaderViewRegisterButton';
 import TableList from '~/components/TableList';
+import NoResult from '~/components/NoResult';
 
 import ufConversor from '~/util/ufConversor';
 import api from '~/services/api';
@@ -72,36 +73,41 @@ export default function List({ match }) {
         <HeaderViewRegisterButton path={match.path} />
       </HeaderView>
 
-      <TableList thead={['ID', 'Nome', 'Endereço', 'Ações']}>
-        {recipients.map(recipient => (
-          <tr key={recipient.id}>
-            <td>{recipient.idFormatted}</td>
+      {(recipients.length && (
+        <>
+          {' '}
+          <TableList thead={['ID', 'Nome', 'Endereço', 'Ações']}>
+            {recipients.map(recipient => (
+              <tr key={recipient.id}>
+                <td>{recipient.idFormatted}</td>
 
-            <td>{recipient.name}</td>
+                <td>{recipient.name}</td>
 
-            <td>{recipient.address}</td>
+                <td>{recipient.address}</td>
 
-            <td>
-              <MenuActions
-                noView
-                options={{
-                  deleteSuccessMessage: 'Destinatário deletado com sucesso !',
-                }}
-                path={match.path}
-                id={recipient.id}
-                load={loadRecipients}
-              />
-            </td>
-          </tr>
-        ))}
-      </TableList>
-
-      <Pagination
-        currentPage={page}
-        totalPages={totalPages}
-        backPage={backPage}
-        nextPage={nextPage}
-      />
+                <td>
+                  <MenuActions
+                    noView
+                    options={{
+                      deleteSuccessMessage:
+                        'Destinatário deletado com sucesso !',
+                    }}
+                    path={match.path}
+                    id={recipient.id}
+                    load={loadRecipients}
+                  />
+                </td>
+              </tr>
+            ))}
+          </TableList>
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            backPage={backPage}
+            nextPage={nextPage}
+          />{' '}
+        </>
+      )) || <NoResult />}
     </Container>
   );
 }

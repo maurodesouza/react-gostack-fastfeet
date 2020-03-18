@@ -7,6 +7,7 @@ import HeaderView from '~/components/HeaderView';
 import HeaderViewForm from '~/components/HeaderView/HeaderViewForm';
 import HeaderViewRegisterButton from '~/components/HeaderView/HeaderViewRegisterButton';
 import TableList from '~/components/TableList';
+import NoResult from '~/components/NoResult';
 
 import api from '~/services/api';
 import { firtsLetters } from '~/util/regex';
@@ -69,42 +70,45 @@ export default function List({ match }) {
         <HeaderViewRegisterButton path={match.path} />
       </HeaderView>
 
-      <TableList thead={['ID', 'Foto', 'Nome', 'Email', 'Ações']}>
-        {deliverymans.map(deliveryman => (
-          <tr key={deliveryman.id}>
-            <td>{deliveryman.idFormatted}</td>
+      {(deliverymans.length && (
+        <>
+          <TableList thead={['ID', 'Foto', 'Nome', 'Email', 'Ações']}>
+            {deliverymans.map(deliveryman => (
+              <tr key={deliveryman.id}>
+                <td>{deliveryman.idFormatted}</td>
 
-            <td>
-              {(deliveryman.avatar && (
-                <Img src={deliveryman.avatar.url} alt={deliveryman.name} />
-              )) || <NoImage>{firtsLetters(deliveryman.name)}</NoImage>}
-            </td>
+                <td>
+                  {(deliveryman.avatar && (
+                    <Img src={deliveryman.avatar.url} alt={deliveryman.name} />
+                  )) || <NoImage>{firtsLetters(deliveryman.name)}</NoImage>}
+                </td>
 
-            <td>{deliveryman.name}</td>
+                <td>{deliveryman.name}</td>
 
-            <td>{deliveryman.email}</td>
+                <td>{deliveryman.email}</td>
 
-            <td>
-              <MenuActions
-                noView
-                options={{
-                  deleteSuccessMessage: 'Entregador deletado com sucesso !',
-                }}
-                path={match.path}
-                id={deliveryman.id}
-                load={loadDeliverymans}
-              />
-            </td>
-          </tr>
-        ))}
-      </TableList>
-
-      <Pagination
-        currentPage={page}
-        totalPages={totalPages}
-        backPage={backPage}
-        nextPage={nextPage}
-      />
+                <td>
+                  <MenuActions
+                    noView
+                    options={{
+                      deleteSuccessMessage: 'Entregador deletado com sucesso !',
+                    }}
+                    path={match.path}
+                    id={deliveryman.id}
+                    load={loadDeliverymans}
+                  />
+                </td>
+              </tr>
+            ))}
+          </TableList>
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            backPage={backPage}
+            nextPage={nextPage}
+          />{' '}
+        </>
+      )) || <NoResult />}
     </Container>
   );
 }

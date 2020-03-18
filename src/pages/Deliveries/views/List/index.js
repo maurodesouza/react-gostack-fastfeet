@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 
 import Pagination from '~/components/Pagination';
+import NoResult from '~/components/NoResult';
 import HeaderView from '~/components/HeaderView';
 import HeaderViewForm from '~/components/HeaderView/HeaderViewForm';
 import HeaderViewRegisterButton from '~/components/HeaderView/HeaderViewRegisterButton';
@@ -103,18 +104,22 @@ export default function List({ match }) {
         <HeaderViewRegisterButton path={match.path} />
       </HeaderView>
 
-      <TableList
-        path={match.path}
-        load={loadDeliveries}
-        deliveries={deliveries}
-      />
-
-      <Pagination
-        currentPage={page}
-        totalPages={totalPages}
-        backPage={backPage}
-        nextPage={nextPage}
-      />
+      {(deliveries.length && (
+        <>
+          {' '}
+          <TableList
+            path={match.path}
+            load={loadDeliveries}
+            deliveries={deliveries}
+          />
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            backPage={backPage}
+            nextPage={nextPage}
+          />{' '}
+        </>
+      )) || <NoResult />}
 
       {modalDelivery && (
         <Modal
