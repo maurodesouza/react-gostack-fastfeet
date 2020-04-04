@@ -34,6 +34,7 @@ export const Container = styled.div`
       font-size: 16px;
       border-radius: 5px;
       margin-bottom: 15px;
+      width: 100%;
 
       &::placeholder {
         color: #999;
