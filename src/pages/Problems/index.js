@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import PropTypes from 'prop-types';
+import { useRouteMatch } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
 import { format, parseISO } from 'date-fns';
@@ -18,7 +18,9 @@ import { yet100Digits } from '~/util/regex';
 
 import * as S from './styles';
 
-export default function List({ match }) {
+export default function List() {
+  const match = useRouteMatch();
+
   const [loading, setLoading] = useState(true);
   const [problems, setProblems] = useState([]);
   const [modalProblems, setModalProblems] = useState(null);
@@ -154,13 +156,3 @@ export default function List({ match }) {
     </S.Container>
   );
 }
-
-List.propTypes = {
-  match: PropTypes.shape({
-    path: PropTypes.string,
-    url: PropTypes.string,
-    params: PropTypes.shape({
-      id: PropTypes.string,
-    }),
-  }).isRequired,
-};

@@ -11,9 +11,9 @@ export default function Routes() {
   return (
     <Switch>
       <Route path={path} exact component={List} />
-      <Route path={`${path}/:id`} component={List} />
       <Route path={`${path}/add`} component={Form} />
       <Route path={`${path}/edit/:id`} component={Form} />
+      <Route path={`${path}/:id`} component={List} />
     </Switch>
   );
 }

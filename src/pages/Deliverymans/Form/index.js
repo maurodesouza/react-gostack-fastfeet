@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+import { useRouteMatch } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import { toast } from 'react-toastify';
@@ -15,8 +15,9 @@ import { atLeastTwoNames } from '~/util/regex';
 
 import * as S from './styles';
 
-export default function Form({ match }) {
+export default function Form() {
   const formRef = useRef(null);
+  const match = useRouteMatch();
 
   const addRequest = async data => {
     try {
@@ -162,7 +163,3 @@ export default function Form({ match }) {
     </S.Container>
   );
 }
-
-Form.propTypes = {
-  match: PropTypes.instanceOf(Object).isRequired,
-};

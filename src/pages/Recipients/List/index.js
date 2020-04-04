@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import PropTypes from 'prop-types';
+import { useRouteMatch } from 'react-router-dom';
 
 import MenuActions from '~/components/MenuActions';
 import Pagination from '~/components/Pagination';
@@ -15,7 +15,9 @@ import api from '~/services/api';
 
 import * as S from './styles';
 
-export default function List({ match }) {
+export default function List() {
+  const match = useRouteMatch();
+
   const [loading, setLoading] = useState(true);
   const [recipients, setRecipients] = useState([]);
 
@@ -116,9 +118,3 @@ export default function List({ match }) {
     </S.Container>
   );
 }
-
-List.propTypes = {
-  match: PropTypes.shape({
-    path: PropTypes.string,
-  }).isRequired,
-};

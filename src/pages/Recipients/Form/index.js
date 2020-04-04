@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import * as Yup from 'yup';
+import { useRouteMatch } from 'react-router-dom';
 
+import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 
 import HeaderView from '~/components/HeaderView';
@@ -19,8 +19,9 @@ import { options } from './selectContent';
 
 import * as S from './styles';
 
-export default function Form({ match }) {
+export default function Form() {
   const formRef = useRef(null);
+  const match = useRouteMatch();
 
   const addRequest = async (data, reset) => {
     try {
@@ -193,7 +194,3 @@ export default function Form({ match }) {
     </S.Container>
   );
 }
-
-Form.propTypes = {
-  match: PropTypes.instanceOf(Object).isRequired,
-};

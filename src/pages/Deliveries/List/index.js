@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import PropTypes from 'prop-types';
+import { useRouteMatch } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
 
@@ -18,7 +18,9 @@ import TableList from './tableListContent';
 
 import * as S from './styles';
 
-export default function List({ match }) {
+export default function List() {
+  const match = useRouteMatch();
+
   const [loading, setLoading] = useState(true);
   const [deliveries, setDeliveries] = useState([]);
   const [modalDelivery, setModalDelivery] = useState(null);
@@ -67,7 +69,7 @@ export default function List({ match }) {
   }, [loadDeliveries]);
 
   useEffect(() => {
-    const { url, params, path } = match;
+    const { url, path } = match;
 
     if (path === '/deliveries') return;
 
@@ -84,15 +86,7 @@ export default function List({ match }) {
       }
     };
 
-    if (Number.isInteger(Number(params.id))) {
-      loadDelivery();
-      return;
-    }
-
-    history.push('/deliveries');
-    toast.error('Passe um ID valido para visualizar a encomenda !', {
-      autoClose: 3500,
-    });
+    loadDelivery();
   }, [match]);
 
   return (
@@ -141,13 +135,3 @@ export default function List({ match }) {
     </S.Container>
   );
 }
-
-List.propTypes = {
-  match: PropTypes.shape({
-    path: PropTypes.string,
-    url: PropTypes.string,
-    params: PropTypes.shape({
-      id: PropTypes.string,
-    }),
-  }).isRequired,
-};
