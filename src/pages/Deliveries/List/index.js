@@ -6,9 +6,7 @@ import { toast } from 'react-toastify';
 import Pagination from '~/components/Pagination';
 import Animation from '~/components/Animation';
 import NoResult from '~/components/NoResult';
-import HeaderView from '~/components/HeaderView';
-import HeaderViewForm from '~/components/HeaderView/HeaderViewForm';
-import HeaderViewRegisterButton from '~/components/HeaderView/HeaderViewRegisterButton';
+import * as HV from '~/components/HeaderView';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -91,13 +89,10 @@ export default function List() {
 
   return (
     <S.Container teste={deliveries}>
-      <HeaderView title="Gerenciando encomendas">
-        <HeaderViewForm
-          placeholder="Buscar por encomendas"
-          onSearch={onSearch}
-        />
-        <HeaderViewRegisterButton path={match.path} />
-      </HeaderView>
+      <HV.Container title="Gerenciando encomendas">
+        <HV.Form placeholder="Buscar por encomendas" onSearch={onSearch} />
+        <HV.RegisterButton path={match.path} />
+      </HV.Container>
 
       {!loading &&
         (deliveries.length ? (

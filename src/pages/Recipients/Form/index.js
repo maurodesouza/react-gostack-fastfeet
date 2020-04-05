@@ -4,9 +4,7 @@ import { useRouteMatch } from 'react-router-dom';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 
-import HeaderView from '~/components/HeaderView';
-import HeaderViewBackButton from '~/components/HeaderView/HeaderViewBackButton';
-import HeaderViewSaveButton from '~/components/HeaderView/HeaderViewSaveButton';
+import * as HV from '~/components/HeaderView';
 import { SelectAsync } from '~/components/Form/Selects';
 
 import api from '~/services/api';
@@ -133,7 +131,7 @@ export default function Form() {
 
   return (
     <S.Container>
-      <HeaderView
+      <HV.Container
         title={
           match.path === '/recipients/add'
             ? 'Cadastro de destinatários'
@@ -141,9 +139,9 @@ export default function Form() {
         }
         isToForm
       >
-        <HeaderViewBackButton />
-        <HeaderViewSaveButton onClick={() => formRef.current.submitForm()} />
-      </HeaderView>
+        <HV.BackButton />
+        <HV.SaveButton onClick={() => formRef.current.submitForm()} />
+      </HV.Container>
 
       <S.UnForm ref={formRef} onSubmit={validation}>
         <S.Wrapper columns={2}>

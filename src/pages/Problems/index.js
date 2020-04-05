@@ -7,10 +7,10 @@ import { format, parseISO } from 'date-fns';
 import MenuActions from '~/components/MenuActions';
 import Pagination from '~/components/Pagination';
 import Animation from '~/components/Animation';
-import HeaderView from '~/components/HeaderView';
 import TableList from '~/components/TableList';
 import Modal from '~/components/Modal';
 import NoResult from '~/components/NoResult';
+import * as HV from '~/components/HeaderView';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -82,7 +82,7 @@ export default function List() {
 
   return (
     <S.Container>
-      <HeaderView title="Problemas na entrega" />
+      <HV.Container title="Problemas na entrega" />
       {!loading &&
         (problems.length ? (
           <Animation>

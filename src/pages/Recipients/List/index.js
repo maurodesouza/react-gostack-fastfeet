@@ -3,12 +3,10 @@ import { useRouteMatch } from 'react-router-dom';
 
 import MenuActions from '~/components/MenuActions';
 import Pagination from '~/components/Pagination';
-import HeaderView from '~/components/HeaderView';
 import Animation from '~/components/Animation';
-import HeaderViewForm from '~/components/HeaderView/HeaderViewForm';
-import HeaderViewRegisterButton from '~/components/HeaderView/HeaderViewRegisterButton';
 import TableList from '~/components/TableList';
 import NoResult from '~/components/NoResult';
+import * as HV from '~/components/HeaderView';
 
 import ufConversor from '~/util/ufConversor';
 import api from '~/services/api';
@@ -66,14 +64,14 @@ export default function List() {
 
   return (
     <S.Container>
-      <HeaderView title="Gerenciando destinatários">
-        <HeaderViewForm
+      <HV.Container title="Gerenciando destinatários">
+        <HV.Form
           searchOnly
           placeholder="Buscar por destinatários"
           onSearch={onSearch}
         />
-        <HeaderViewRegisterButton path={match.path} />
-      </HeaderView>
+        <HV.RegisterButton path={match.path} />
+      </HV.Container>
 
       {!loading &&
         (recipients.length ? (

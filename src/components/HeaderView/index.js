@@ -1,24 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
-import * as S from './styles';
-
-export default function HeaderView({ title, isToForm, children }) {
-  return (
-    <S.Container isToForm={isToForm} existChildren={!!children}>
-      <h1>{title}</h1>
-      {children && <div>{children}</div>}
-    </S.Container>
-  );
-}
-
-HeaderView.propTypes = {
-  title: PropTypes.string.isRequired,
-  isToForm: PropTypes.bool,
-  children: PropTypes.instanceOf(Array),
-};
-
-HeaderView.defaultProps = {
-  isToForm: false,
-  children: null,
-};
+export { default as Container } from './HV_Container';
+export { default as Form } from './HV_Form';
+export { default as BackButton } from './HV_BackButton';
+export { default as SaveButton } from './HV_SaveButton';
+export { default as RegisterButton } from './HV_RegisterButton';

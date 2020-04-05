@@ -4,9 +4,7 @@ import * as Yup from 'yup';
 
 import { toast } from 'react-toastify';
 
-import HeaderView from '~/components/HeaderView';
-import HeaderViewBackButton from '~/components/HeaderView/HeaderViewBackButton';
-import HeaderViewSaveButton from '~/components/HeaderView/HeaderViewSaveButton';
+import * as HV from '~/components/HeaderView';
 import { AvatarInput } from '~/components/Form/Inputs';
 
 import api from '~/services/api';
@@ -136,7 +134,7 @@ export default function Form() {
 
   return (
     <S.Container>
-      <HeaderView
+      <HV.Container
         title={
           match.path === '/deliverymans/add'
             ? 'Cadastro de entregadores'
@@ -144,9 +142,9 @@ export default function Form() {
         }
         isToForm
       >
-        <HeaderViewBackButton />
-        <HeaderViewSaveButton onClick={() => formRef.current.submitForm()} />
-      </HeaderView>
+        <HV.BackButton />
+        <HV.SaveButton onClick={() => formRef.current.submitForm()} />
+      </HV.Container>
 
       <S.UnForm ref={formRef} onSubmit={validation}>
         <AvatarInput name="avatar" />

@@ -4,11 +4,9 @@ import { useRouteMatch } from 'react-router-dom';
 import MenuActions from '~/components/MenuActions';
 import Pagination from '~/components/Pagination';
 import Animation from '~/components/Animation';
-import HeaderView from '~/components/HeaderView';
-import HeaderViewForm from '~/components/HeaderView/HeaderViewForm';
-import HeaderViewRegisterButton from '~/components/HeaderView/HeaderViewRegisterButton';
 import TableList from '~/components/TableList';
 import NoResult from '~/components/NoResult';
+import * as HV from '~/components/HeaderView';
 
 import api from '~/services/api';
 import { firtsLetters } from '~/util/regex';
@@ -63,14 +61,14 @@ export default function List() {
 
   return (
     <S.Container>
-      <HeaderView title="Gerenciando entregadores">
-        <HeaderViewForm
+      <HV.Container title="Gerenciando entregadores">
+        <HV.Form
           searchOnly
           placeholder="Buscar por entregadores"
           onSearch={onSearch}
         />
-        <HeaderViewRegisterButton path={match.path} />
-      </HeaderView>
+        <HV.RegisterButton path={match.path} />
+      </HV.Container>
 
       {!loading &&
         (deliverymans.length ? (
