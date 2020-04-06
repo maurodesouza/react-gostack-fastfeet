@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
+import { background } from '~/styles/colors';
+
 export const Container = styled.div`
   min-height: 100%;
-  background: #f5f5f5;
+  background: ${background.third};
 `;

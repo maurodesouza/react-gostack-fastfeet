@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import { transparentize } from 'polished';
+
+import { fontColors, background, borderColor } from '~/styles/colors';
 
 export const Container = styled.div`
   width: 100%;
@@ -15,18 +18,18 @@ export const defaultStyles = {
     ...provided,
     height: '100%',
     boxShadow: 0,
-    background: '#fff',
+    background: background.secund,
     width: '100%',
-    border: '1px solid #ddd',
+    border: `1px solid ${borderColor.fourth}`,
     borderRadius: '5px',
 
     ':hover': {
-      border: '1px solid #ddd',
+      border: `1px solid ${borderColor.fourth}`,
     },
   }),
   placeholder: provider => ({
     ...provider,
-    color: '#999',
+    color: fontColors.third,
   }),
   indicatorSeparator: provider => ({
     ...provider,
@@ -34,7 +37,7 @@ export const defaultStyles = {
   }),
   dropdownIndicator: provider => ({
     ...provider,
-    color: '#999',
+    color: fontColors.third,
 
     ':hover': {
       opacity: 0.6,
@@ -42,7 +45,7 @@ export const defaultStyles = {
   }),
   singleValue: provider => ({
     ...provider,
-    color: '#999',
+    color: fontColors.third,
   }),
   menuList: provider => ({
     ...provider,
@@ -51,12 +54,12 @@ export const defaultStyles = {
   }),
   option: (provider, { isSelected }) => ({
     ...provider,
-    background: isSelected ? '#7D40E7' : '#fff',
-    color: isSelected ? '#fff' : '#999',
+    background: isSelected ? background.first : background.secund,
+    color: isSelected ? fontColors.first : fontColors.third,
 
     ':hover': {
-      background: isSelected ? '' : '#7D40E799',
-      color: '#fff',
+      background: isSelected ? '' : transparentize(0.4, background.first),
+      color: fontColors.first,
     },
   }),
 };

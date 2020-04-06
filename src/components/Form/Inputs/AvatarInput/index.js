@@ -4,6 +4,7 @@ import { useField } from '@unform/core';
 
 import { MdImage } from 'react-icons/md';
 
+import { iconColors } from '~/styles/colors';
 import * as S from './styles';
 
 export default function AvatarInput({ name }) {
@@ -43,7 +44,7 @@ export default function AvatarInput({ name }) {
       <label htmlFor={fieldName}>
         {(preview && <img src={preview} alt="" />) || (
           <S.Wrapper>
-            <MdImage size={60} color="#ddd" />
+            <MdImage size={60} color={iconColors.sixth} />
             <span>Adicionar foto</span>
           </S.Wrapper>
         )}

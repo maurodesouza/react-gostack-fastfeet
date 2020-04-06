@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import { transparentize } from 'polished';
+
+import { fontColors, background, borderColor } from '~/styles/colors';
 
 export const Container = styled.div`
   width: 100%;
@@ -6,7 +9,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #000000b3;
+  background: ${transparentize(0.3, background.seventh)};
   position: fixed;
   top: 0;
   left: 0;
@@ -14,12 +17,12 @@ export const Container = styled.div`
 
 export const Wrapper = styled.div`
   padding: 30px 30px 60px;
-  background: #fff;
+  background: ${background.secund};
   width: 450px;
   border-radius: 5px;
 
   h2 {
-    color: #444;
+    color: ${fontColors.fourth};
     font-weight: bold;
     margin-bottom: 5px;
     font-size: 14px;
@@ -41,8 +44,8 @@ export const Wrapper = styled.div`
   div {
     padding: 10px 0;
     margin: 10px 0;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    border-top: 1px solid ${borderColor.third};
+    border-bottom: 1px solid ${borderColor.third};
   }
 
   img {

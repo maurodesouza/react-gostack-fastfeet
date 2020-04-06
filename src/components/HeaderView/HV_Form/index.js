@@ -8,6 +8,7 @@ import { Input } from '~/components/Form/Inputs';
 
 import { options } from './selectContent';
 
+import { iconColors } from '~/styles/colors';
 import * as S from './styles';
 
 export default function HeaderForm({ onSearch, searchOnly, ...rest }) {
@@ -24,7 +25,7 @@ export default function HeaderForm({ onSearch, searchOnly, ...rest }) {
       <S.Form ref={formRef} onSubmit={handleSubmit}>
         <S.SearchWrapper>
           <button type="submit" onSubmit={handleSubmit}>
-            <MdSearch size={20} color="#999" />
+            <MdSearch size={20} color={iconColors.seventh} />
           </button>
           <Input name="search" {...rest} />
         </S.SearchWrapper>

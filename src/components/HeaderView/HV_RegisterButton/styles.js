@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
+import { fontColors, background, borderColor } from '~/styles/colors';
+
 export const Button = styled.button`
-  background: #7d40e7;
-  border: 1px solid #7d40e7;
+  background: ${background.first};
+  border: 1px solid ${borderColor.first};
   padding: 10px 15px;
-  color: #fff;
+  color: ${fontColors.first};
   border-radius: 5px;
   display: flex;
   align-items: center;

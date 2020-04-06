@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { fontColors, background } from '~/styles/colors';
+
 export const Table = styled.table`
   margin-top: 20px;
   width: 100%;
@@ -8,7 +10,7 @@ export const Table = styled.table`
   thead th {
     font-size: 16px;
     font-weight: bold;
-    color: #444;
+    color: ${fontColors.fourth};
     text-align: left;
     padding: 20px;
 
@@ -23,7 +25,7 @@ export const Table = styled.table`
     td {
       padding: 20px;
       vertical-align: middle;
-      background: #fff;
+      background: ${background.secund};
       font-size: 16px;
 
       &:first-child {

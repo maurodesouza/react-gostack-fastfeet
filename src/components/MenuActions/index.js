@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 
+import { iconColors } from '~/styles/colors';
 import * as S from './styles';
 
 export default function MenuActions({
@@ -64,24 +65,24 @@ export default function MenuActions({
       <S.ActionsList visible={visible}>
         {!noView && (
           <Link to={`${path}/${id}`} onClick={() => setVisible(false)}>
-            <MdRemoveRedEye color="#8e5be8" /> Visualizar
+            <MdRemoveRedEye color={iconColors.first} /> Visualizar
           </Link>
         )}
 
         {!noEditable && (
           <Link to={`${path}/edit/${id}`}>
-            <MdCreate color="#4d85ee" /> Editar
+            <MdCreate color={iconColors.third} /> Editar
           </Link>
         )}
 
         <S.DeleteButton onClick={onDelete} confirm={confirm}>
           {confirm ? (
             <>
-              <IoMdAlert color="#c1bc35" /> Confirmar !
+              <IoMdAlert color={iconColors.fourth} /> Confirmar !
             </>
           ) : (
             <>
-              <MdDeleteForever color="#de3b3b" />{' '}
+              <MdDeleteForever color={iconColors.secund} />{' '}
               {options.deleteLabel || 'Deletar'}
             </>
           )}

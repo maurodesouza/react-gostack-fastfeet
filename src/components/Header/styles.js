@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
+import { fontColors, background, borderColor } from '~/styles/colors';
+
 export const Container = styled.header`
   width: 100%;
-  background: #fff;
+  background: ${background.secund};
   padding: 0 30px;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid ${borderColor.fourth};
 
   div {
     display: flex;
@@ -20,11 +22,11 @@ export const Container = styled.header`
     nav {
       margin-left: 30px;
       padding: 6px 0 6px 30px;
-      border-left: 1px solid #ddd;
+      border-left: 1px solid ${borderColor.fourth};
 
       a {
         font-size: 15px;
-        color: #999;
+        color: ${fontColors.third};
         text-transform: uppercase;
         font-weight: bold;
         margin-right: 20px;
@@ -32,7 +34,7 @@ export const Container = styled.header`
 
         &.active,
         &:hover {
-          color: #444;
+          color: ${fontColors.fourth};
         }
       }
     }
@@ -47,7 +49,7 @@ export const Container = styled.header`
     button {
       border: none;
       background: none;
-      color: #de3b3b;
+      color: ${fontColors.sixth};
     }
   }
 `;

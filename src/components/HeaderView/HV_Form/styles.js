@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 import { Form as unForm } from '@unform/web';
 
+import { fontColors, background, borderColor } from '~/styles/colors';
+
 export const Form = styled(unForm)`
   display: flex;
 `;
 
 export const SearchWrapper = styled.span`
-  background: #fff;
+  background: ${background.secund};
   width: 235px;
-  border: 1px solid #ddd;
+  border: 1px solid ${borderColor.fourth};
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -19,10 +21,10 @@ export const SearchWrapper = styled.span`
     background: transparent;
     font-size: 14px;
     border: 0;
-    color: #999;
+    color: ${fontColors.third};
 
     &::placeholder {
-      color: #999;
+      color: ${fontColors.third};
     }
   }
 

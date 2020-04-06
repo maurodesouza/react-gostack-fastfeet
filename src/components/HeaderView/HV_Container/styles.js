@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 
+import { fontColors } from '~/styles/colors';
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -7,7 +9,7 @@ export const Container = styled.div`
   h1 {
     font-size: 24px;
     font-weight: bold;
-    color: #444;
+    color: ${fontColors.fourth};
     margin: ${({ existChildren }) => (existChildren ? '5px 0 35px' : '0')};
   }
 

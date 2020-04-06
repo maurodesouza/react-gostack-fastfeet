@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { fontColors } from '~/styles/colors';
 import noResultImage from '~/assets/images/noresult.svg';
 
 export const Container = styled.div`
@@ -10,7 +11,7 @@ export const Container = styled.div`
   display: flex;
 
   h2 {
-    color: #444;
+    color: ${fontColors.fourth};
     font-size: 24px;
   }
 `;

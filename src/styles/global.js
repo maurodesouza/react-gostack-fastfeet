@@ -1,6 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { fontColors } from '~/styles/colors';
+
 export default createGlobalStyle`
   * {
     margin: 0;
@@ -19,7 +21,7 @@ export default createGlobalStyle`
 
   body, button, input {
     font: 14px Roboto, sans-serif;
-    color: #666;
+    color: ${fontColors.default};
   }
 
   body {

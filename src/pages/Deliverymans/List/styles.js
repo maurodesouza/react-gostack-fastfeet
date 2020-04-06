@@ -1,31 +1,6 @@
 import styled, { css } from 'styled-components';
 
-const noImageBackground = [
-  {
-    background: '#f4effc',
-    color: '#a28fd0',
-  },
-  {
-    background: '#fcf4ee',
-    color: '#cb946c',
-  },
-  {
-    background: '#ebfbfa',
-    color: '#83cec9',
-  },
-  {
-    background: '#ffeef1',
-    color: '#cc7584',
-  },
-  {
-    background: '#f4f9ef',
-    color: '#a8d080',
-  },
-  {
-    background: '#fcfcef',
-    color: '#cccc8b',
-  },
-];
+import { noImageBackground } from '~/styles/colors';
 
 export const Container = styled.div`
   margin: 30px auto 0;

@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
+import { fontColors, background, borderColor } from '~/styles/colors';
+
 export const Button = styled.button`
-  background: #7d40e7;
-  border: 1px solid #7d40e7;
+  background: ${background.first};
+  border: 1px solid ${borderColor.first};
   width: 112px;
   padding: 10px 15px;
-  color: #fff;
+  color: ${fontColors.first};
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -24,8 +26,8 @@ export const Icon = styled.span`
   position: relative;
   width: 15px;
   height: 8px;
-  border-bottom: 2px solid #fff;
-  border-left: 2px solid #fff;
+  border-bottom: 2px solid ${borderColor.secund};
+  border-left: 2px solid ${borderColor.secund};
   transform: rotate(-45deg);
   margin-right: 8px;
   top: -3px;
