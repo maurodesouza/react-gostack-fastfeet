@@ -22,6 +22,7 @@ export const defaultStyles = {
     width: '100%',
     border: `1px solid ${borderColor.fourth}`,
     borderRadius: '5px',
+    cursor: 'pointer',
 
     ':hover': {
       border: `1px solid ${borderColor.fourth}`,
@@ -56,6 +57,7 @@ export const defaultStyles = {
     ...provider,
     background: isSelected ? background.first : background.secund,
     color: isSelected ? fontColors.first : fontColors.third,
+    cursor: isSelected ? 'default' : 'pointer',
 
     ':hover': {
       background: isSelected ? '' : transparentize(0.4, background.first),

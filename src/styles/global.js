@@ -41,6 +41,10 @@ export default createGlobalStyle`
     list-style: none;
   }
 
+  p, h1, h2, th, td, strong, span {
+    cursor: default;
+  }
+
   .toast {
     border-radius: 5px;
     font-size: 16px;

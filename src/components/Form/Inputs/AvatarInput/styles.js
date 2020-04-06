@@ -13,6 +13,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   padding: 5px;
+  cursor: pointer;
 
   &:hover {
     opacity: 0.6;
@@ -41,10 +42,12 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  cursor: pointer;
 
   span {
     font-size: 16px;
     color: ${fontColors.secund};
     font-weight: bold;
+    cursor: pointer;
   }
 `;

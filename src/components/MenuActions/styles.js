@@ -10,7 +10,8 @@ export const Container = styled.div`
 
 export const Icon = styled.div`
   display: flex;
-  padding: 5px;
+  padding: 10px;
+  cursor: pointer;
 
   &:hover span {
     opacity: 0.6;
@@ -22,6 +23,7 @@ export const Icon = styled.div`
     height: 4px;
     border-radius: 50%;
     background: ${background.fifth};
+    cursor: pointer;
 
     & + span {
       margin-left: 2px;
