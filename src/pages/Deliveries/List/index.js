@@ -88,7 +88,7 @@ export default function List() {
   }, [match]);
 
   return (
-    <S.Container teste={deliveries}>
+    <S.Container>
       <HV.Container title="Gerenciando encomendas">
         <HV.Form placeholder="Buscar por encomendas" onSearch={onSearch} />
         <HV.RegisterButton path={match.path} />

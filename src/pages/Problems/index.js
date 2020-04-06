@@ -137,7 +137,7 @@ export default function List() {
         <Modal
           onClose={() => [history.push('/problems'), setModalProblems(null)]}
         >
-          <h2>Visualizar Problmeas</h2>
+          <h2>Visualizar Problemas</h2>
 
           <div>
             {modalProblems.delivery_problems.map(problem => (

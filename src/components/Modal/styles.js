@@ -41,6 +41,17 @@ export const Wrapper = styled.div`
     font-weight: bold;
   }
 
+  a {
+    display: block;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: color 0.2s;
+
+    &:hover {
+      color: ${fontColors.sixth};
+    }
+  }
+
   div {
     padding: 10px 0;
     margin: 10px 0;

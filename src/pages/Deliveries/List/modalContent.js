@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { format, parseISO } from 'date-fns';
@@ -28,10 +29,10 @@ export default function ModalContent({ delivery, ...rest }) {
         {delivery.status}
       </p>
       {delivery.have_problem && (
-        <p>
+        <Link to={`/problems/${delivery.id}`}>
           Essa encomenda possui {delivery.delivery_problems.length}{' '}
           {delivery.delivery_problems.length > 1 ? 'problemas' : 'problema'}
-        </p>
+        </Link>
       )}
 
       <div>

@@ -33,6 +33,7 @@ export default createGlobalStyle`
   }
 
   a {
+    color: ${fontColors.default};
     text-decoration: none;
   }
 
