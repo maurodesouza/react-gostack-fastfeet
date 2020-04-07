@@ -14,7 +14,6 @@ import * as HV from '~/components/HeaderView';
 
 import api from '~/services/api';
 import history from '~/services/history';
-import { yet100Digits } from '~/util/regex';
 
 import * as S from './styles';
 
@@ -95,11 +94,15 @@ export default function List() {
                   <tr key={problem.id}>
                     <td>{problem.idFormatted}</td>
 
-                    <td>
-                      {delivery_problems.length > 1 &&
-                        `( ${delivery_problems.length} )`}{' '}
-                      {yet100Digits(delivery_problems[0].description)}
-                    </td>
+                    <S.Td>
+                      <div>
+                        <span>
+                          {delivery_problems.length > 1 &&
+                            `( ${delivery_problems.length} )`}{' '}
+                          {delivery_problems[0].description}
+                        </span>
+                      </div>
+                    </S.Td>
 
                     <td>
                       <MenuActions
