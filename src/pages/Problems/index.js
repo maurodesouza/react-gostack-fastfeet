@@ -28,10 +28,6 @@ export default function List() {
 
   const [totalPages, setTotalPages] = useState(0);
 
-  const backPage = () => setPage(page - 1);
-
-  const nextPage = () => setPage(page + 1);
-
   const loadProblems = useCallback(async () => {
     setLoading(true);
 
@@ -126,8 +122,7 @@ export default function List() {
             <Pagination
               currentPage={page}
               totalPages={totalPages}
-              backPage={backPage}
-              nextPage={nextPage}
+              setPage={p => setPage(p)}
             />
           </Animation>
         ) : (

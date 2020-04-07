@@ -35,10 +35,6 @@ export default function List() {
     setPage(1);
   };
 
-  const backPage = () => setPage(page - 1);
-
-  const nextPage = () => setPage(page + 1);
-
   const loadDeliveries = useCallback(async () => {
     setLoading(true);
 
@@ -97,18 +93,17 @@ export default function List() {
       {!loading &&
         (deliveries.length ? (
           <Animation>
-            {' '}
             <TableList
               path={match.path}
               load={loadDeliveries}
               deliveries={deliveries}
             />
+
             <Pagination
               currentPage={page}
               totalPages={totalPages}
-              backPage={backPage}
-              nextPage={nextPage}
-            />{' '}
+              setPage={p => setPage(p)}
+            />
           </Animation>
         ) : (
           <Animation>

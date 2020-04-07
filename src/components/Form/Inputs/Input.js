@@ -8,7 +8,7 @@ import { Error } from '~/components/Form/Error';
 export default function Input({ name, label, ...rest }) {
   const inputRef = useRef(null);
 
-  const { fieldName, registerField, error } = useField(name);
+  const { fieldName, defaultValue, registerField, error } = useField(name);
 
   useEffect(() => {
     registerField({
@@ -21,7 +21,7 @@ export default function Input({ name, label, ...rest }) {
   return (
     <span>
       {label && <Label htmlFor={fieldName}>{label}</Label>}
-      <input ref={inputRef} {...rest} />
+      <input ref={inputRef} defaultValue={defaultValue} {...rest} />
       {error && <Error>{error}</Error>}
     </span>
   );
