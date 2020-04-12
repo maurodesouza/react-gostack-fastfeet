@@ -56,7 +56,7 @@ export const Container = styled.div`
       background: ${background.first};
       border: 0;
       padding: 12px 0;
-      color: ${fontColors.primary};
+      color: ${fontColors.first};
       font-size: 16px;
       font-weight: bold;
       border-radius: 5px;
