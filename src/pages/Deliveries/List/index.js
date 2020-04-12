@@ -38,24 +38,28 @@ export default function List() {
   const loadDeliveries = useCallback(async () => {
     setLoading(true);
 
-    const response = await api.get('/deliveries', {
-      params: {
-        q,
-        page,
-        state,
-      },
-    });
+    try {
+      const response = await api.get('/deliveries', {
+        params: {
+          q,
+          page,
+          state,
+        },
+      });
 
-    const data = response.data.map(delivery => ({
-      ...delivery,
-      idFormatted: `#${`00${delivery.id}`.slice(-2)}`,
-    }));
+      const data = response.data.map(delivery => ({
+        ...delivery,
+        idFormatted: `#${`00${delivery.id}`.slice(-2)}`,
+      }));
 
-    const pageTotal = Math.ceil(response.headers['x-total-count'] / 10);
+      const pageTotal = Math.ceil(response.headers['x-total-count'] / 10);
 
-    setDeliveries(data);
-    setTotalPages(pageTotal);
-    setLoading(false);
+      setDeliveries(data);
+      setTotalPages(pageTotal);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
   }, [page, q, state]);
 
   useEffect(() => {

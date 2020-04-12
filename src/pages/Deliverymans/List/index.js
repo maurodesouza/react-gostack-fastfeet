@@ -32,23 +32,27 @@ export default function List() {
   const loadDeliverymans = useCallback(async () => {
     setLoading(true);
 
-    const response = await api.get('/deliverymans', {
-      params: {
-        q,
-        page,
-      },
-    });
+    try {
+      const response = await api.get('/deliverymans', {
+        params: {
+          q,
+          page,
+        },
+      });
 
-    const data = response.data.map(deliveryman => ({
-      ...deliveryman,
-      idFormatted: `#${`00${deliveryman.id}`.slice(-2)}`,
-    }));
+      const data = response.data.map(deliveryman => ({
+        ...deliveryman,
+        idFormatted: `#${`00${deliveryman.id}`.slice(-2)}`,
+      }));
 
-    const pageTotal = Math.ceil(response.headers['x-total-count'] / 10);
+      const pageTotal = Math.ceil(response.headers['x-total-count'] / 10);
 
-    setDeliverymans(data);
-    setTotalPages(pageTotal);
-    setLoading(false);
+      setDeliverymans(data);
+      setTotalPages(pageTotal);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
   }, [page, q]);
 
   useEffect(() => {

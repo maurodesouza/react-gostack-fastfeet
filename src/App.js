@@ -8,10 +8,13 @@ import '~/config/reactotronConfig';
 import '~/config/yup';
 
 import Routes from '~/routes';
+import { configInterceptor } from '~/services/api';
 import history from '~/services/history';
 import GlobalStyles from '~/styles/global';
 
 import { store, persistor } from '~/store';
+
+configInterceptor(store);
 
 export default function App() {
   return (

@@ -31,23 +31,27 @@ export default function List() {
   const loadProblems = useCallback(async () => {
     setLoading(true);
 
-    const response = await api.get('/deliveries', {
-      params: {
-        page,
-        state: 'problemas',
-      },
-    });
+    try {
+      const response = await api.get('/deliveries', {
+        params: {
+          page,
+          state: 'problemas',
+        },
+      });
 
-    const data = response.data.map(problem => ({
-      ...problem,
-      idFormatted: `#${`00${problem.id}`.slice(-2)}`,
-    }));
+      const data = response.data.map(problem => ({
+        ...problem,
+        idFormatted: `#${`00${problem.id}`.slice(-2)}`,
+      }));
 
-    const pageTotal = Math.ceil(response.headers['x-total-count'] / 10);
+      const pageTotal = Math.ceil(response.headers['x-total-count'] / 10);
 
-    setProblems(data);
-    setTotalPages(pageTotal);
-    setLoading(false);
+      setProblems(data);
+      setTotalPages(pageTotal);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
   }, [page]);
 
   useEffect(() => {

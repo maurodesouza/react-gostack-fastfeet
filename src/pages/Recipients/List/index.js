@@ -32,26 +32,30 @@ export default function List() {
   const loadRecipients = useCallback(async () => {
     setLoading(true);
 
-    const response = await api.get('/recipients', {
-      params: {
-        q,
-        page,
-      },
-    });
+    try {
+      const response = await api.get('/recipients', {
+        params: {
+          q,
+          page,
+        },
+      });
 
-    const data = response.data.map(recipient => ({
-      ...recipient,
-      idFormatted: `#${`00${recipient.id}`.slice(-2)}`,
-      address: `${recipient.street}, ${recipient.number}, ${
-        recipient.city
-      } - ${ufConversor(recipient.state)}`,
-    }));
+      const data = response.data.map(recipient => ({
+        ...recipient,
+        idFormatted: `#${`00${recipient.id}`.slice(-2)}`,
+        address: `${recipient.street}, ${recipient.number}, ${
+          recipient.city
+        } - ${ufConversor(recipient.state)}`,
+      }));
 
-    const pageTotal = Math.ceil(response.headers['x-total-count'] / 10);
+      const pageTotal = Math.ceil(response.headers['x-total-count'] / 10);
 
-    setRecipients(data);
-    setTotalPages(pageTotal);
-    setLoading(false);
+      setRecipients(data);
+      setTotalPages(pageTotal);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
   }, [page, q]);
 
   useEffect(() => {
