@@ -62,5 +62,7 @@ export const Wrapper = styled.div`
   img {
     display: block;
     margin: 20px auto 0;
+    height: 200px;
+    object-fit: cover;
   }
 `;
